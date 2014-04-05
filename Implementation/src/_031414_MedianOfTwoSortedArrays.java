@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * @author Alan
+ * http://decomplexify.blogspot.com/2014/03/algorithm-median-of-2-sorted-arrays.html
+ */
 public class _031414_MedianOfTwoSortedArrays {
 
     /**
