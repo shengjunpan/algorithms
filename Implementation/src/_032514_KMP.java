@@ -13,15 +13,15 @@ public class _032514_KMP {
      *            query
      * @param D
      *            Document
-     * @return if q is a substring of D
+     * @return the starting index of the matched substring, -1 if not found
      */
-    public boolean KMP(String q, String D) {
+    public int KMP(String q, String D) {
         int m = q.length();
         int n = D.length();
 
         // get special cases out of the way
-        if (m == 0) { return true; }
-        if (m > n) { return false; }
+        if (m == 0) { return 0; }
+        if (m > n) { return -1; }
 
         _032314_LongestEquifix equiSolver = new _032314_LongestEquifix();
         // E[i] holds the length of the longest equifix of q[0..i].
@@ -42,10 +42,7 @@ public class _032514_KMP {
             while (i < m && q.charAt(i) == D.charAt(k + i)) { ++i; }
 
             // done if q matches D[k..k+m)
-            if (i == m) {
-                matched = true;
-                break;
-            }
+            if (i == m) { return k; }
 
             if (i == 0) {
                 // special case: mismatch happens at q[0] != D[k]. Shift q by 1.
@@ -60,17 +57,17 @@ public class _032514_KMP {
                 start = L;
             }
         }
-        return matched;
+        return -1;
     }
 
     public static void main(String[] args) {
-        String document = "abcxyzabc";
+        String document = "zzabcxyzabc";
         String[] queries = {"bcx", "xyzc"};
         _032514_KMP solver = new _032514_KMP();
         
         for (String query : queries) {
-            boolean isSubstr = solver.KMP(query, document);
-            System.out.println(query + " in " + document + "? " + isSubstr);
+            int index = solver.KMP(query, document);
+            System.out.println(query + " in " + document + "? " + index);
         }
     }
 

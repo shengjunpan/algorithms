@@ -48,12 +48,19 @@ public class _031814_SortedArrayPlus2 {
      * @return the middle element if new array size is odd, or the middle two
      *         elements if new array size even
      */
-    private <T extends Comparable<T>>
+    public <T extends Comparable<T>>
     ArrayList<T> middleOfPlus2(T[] a, T e1, T e2) {
         // first find where to insert the new elements
+        int j1 = Arrays.binarySearch(a, e1);
+        if (j1 < 0) { j1 = -(j1+1); }
+        int j2 = Arrays.binarySearch(a, e2);
+        if (j2 < 0) { j2 = -(j2+1); }
+        /*
+        // Alternative use binarySearch defined in this package:
         _030514_BinarySearch bsSolver = new _030514_BinarySearch();
         int j1 = bsSolver.binarySearch(a, 0, a.length, e1);
         int j2 = bsSolver.binarySearch(a, 0, a.length, e2);
+        */
         
         int N = a.length + 2; // new array size
         ArrayList<T> middles = new ArrayList<>();
@@ -79,16 +86,23 @@ public class _031814_SortedArrayPlus2 {
     }
     
     private static void element2_test() {
-        Integer[] a = {0, 10, 20, 30, 40};
-        
+        /*
+        Integer[] a = {0, 10, 20, 30, 40};       
         Integer e1 = 15;
         Integer e2 = 35;
         int j1 = 2;
         int j2 = 4;
+        */
+        Integer[] a = {1, 2};
+        Integer e1 = 1;
+        Integer e2 = 2;
+        int j1 = 0;
+        int j2 = 1;
+
         ArrayList<Integer> newA = mergeAndSort(a, e1, e2);
         System.out.println(Arrays.toString(a)+" + {"+e1+","+e2+"} --> "+newA.toString());
         
-        for (int i = 0; i < 7; ++i) {
+        for (int i = 0; i < a.length+2; ++i) {
             System.out.println("newA["+i+"]"+newA.get(i)+" == "+element2(a,i,e1,j1,e2,j2)+"?");
         }        
     }
@@ -112,14 +126,20 @@ public class _031814_SortedArrayPlus2 {
     }
 
     private static void middleOfPlus2_evenTest() {
+        /*
         Integer[] a = {0, 10};
         Integer[] eList = {-5, 5, 15, 25};
+        */
+        Integer[] a = {1, 2};
+        Integer[] eList = {1, 2};
+
+        
         _031814_SortedArrayPlus2 solver = new _031814_SortedArrayPlus2();
         
         System.out.println("--------------");
-        for (int i1 = 0; i1 < 4; ++i1) {
+        for (int i1 = 0; i1 < eList.length; ++i1) {
             Integer e1 = eList[i1];
-            for (int i2 = i1; i2 < 4; ++i2) {
+            for (int i2 = i1; i2 < eList.length; ++i2) {
                 Integer e2 = eList[i2];
                 ArrayList<Integer> newA = mergeAndSort(a, e1, e2);
                 ArrayList<Integer> middles = solver.middleOfPlus2(a, e1, e2);

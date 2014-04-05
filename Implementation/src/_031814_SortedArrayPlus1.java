@@ -39,11 +39,16 @@ public class _031814_SortedArrayPlus1 {
      * @return the middle element if new array size is odd, or the middle two
      *         elements if new array size even
      */
-    private <T extends Comparable<T>>
+    public <T extends Comparable<T>>
     ArrayList<T> middleOfPlus1(T[] a, T e) {
         // first find where to insert the new element
+        int j = Arrays.binarySearch(a, e);
+        if (j < 0) { j = -(j+1); }
+        /*
+        // Alternative use binarySearch defined in this package
         _030514_BinarySearch bsSolver = new _030514_BinarySearch();
         int j = bsSolver.binarySearch(a, 0, a.length, e);
+        */
         
         int N = a.length + 1; // new array size
         ArrayList<T> middles = new ArrayList<>();
