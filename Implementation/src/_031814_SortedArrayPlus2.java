@@ -86,18 +86,11 @@ public class _031814_SortedArrayPlus2 {
     }
     
     private static void element2_test() {
-        /*
         Integer[] a = {0, 10, 20, 30, 40};       
         Integer e1 = 15;
         Integer e2 = 35;
         int j1 = 2;
         int j2 = 4;
-        */
-        Integer[] a = {1, 2};
-        Integer e1 = 1;
-        Integer e2 = 2;
-        int j1 = 0;
-        int j2 = 1;
 
         ArrayList<Integer> newA = mergeAndSort(a, e1, e2);
         System.out.println(Arrays.toString(a)+" + {"+e1+","+e2+"} --> "+newA.toString());
@@ -126,13 +119,8 @@ public class _031814_SortedArrayPlus2 {
     }
 
     private static void middleOfPlus2_evenTest() {
-        /*
         Integer[] a = {0, 10};
         Integer[] eList = {-5, 5, 15, 25};
-        */
-        Integer[] a = {1, 2};
-        Integer[] eList = {1, 2};
-
         
         _031814_SortedArrayPlus2 solver = new _031814_SortedArrayPlus2();
         
