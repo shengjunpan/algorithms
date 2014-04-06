@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author Alan
  *
  */
-public class _031414_MedianOfTwoSortedArraysLeetCode {
+public class MedianOfTwoSortedArraysLeetCode {
     private static <T extends Comparable<T>>
     T element1(T[] a, int i, T e, int j) {
         if (i < j) { return a[i]; }
@@ -150,7 +150,7 @@ public class _031414_MedianOfTwoSortedArraysLeetCode {
         for (int e : a2) { merged[i++] = e; }
         Arrays.sort(merged);
 
-        _031414_MedianOfTwoSortedArraysLeetCode solver = new _031414_MedianOfTwoSortedArraysLeetCode();
+        MedianOfTwoSortedArraysLeetCode solver = new MedianOfTwoSortedArraysLeetCode();
         
         System.out.println("a1: " + Arrays.toString(a1));
         System.out.println("a2: " + Arrays.toString(a2));

@@ -5,7 +5,7 @@ import java.util.Arrays;
  * @author Alan
  * http://decomplexify.blogspot.com/2014/03/algorithm-median-of-2-sorted-arrays.html
  */
-public class _031414_MedianOfTwoSortedArrays {
+public class MedianOfTwoSortedArrays {
 
     /**
      * helper functions to find the median a sorted array,
@@ -34,8 +34,8 @@ public class _031414_MedianOfTwoSortedArrays {
             int temp = n1; n1 = n2; n2 = temp;
         }
         
-        _031814_SortedArrayPlus1 solver1 = new _031814_SortedArrayPlus1();
-        _031814_SortedArrayPlus2 solver2 = new _031814_SortedArrayPlus2();
+        SortedArrayPlus1 solver1 = new SortedArrayPlus1();
+        SortedArrayPlus2 solver2 = new SortedArrayPlus2();
         
         // base cases
         switch (n2) {
@@ -75,7 +75,7 @@ public class _031414_MedianOfTwoSortedArrays {
                 {{3, 5, 7, 9, 11, 13, 15}, {2, 5, 6, 8, 12, 13}},
                 {{1, 2, 3, 5, 7, 15, 16}, {9, 11, 13, 15, 17}}};
         
-        _031414_MedianOfTwoSortedArrays solver = new _031414_MedianOfTwoSortedArrays();
+        MedianOfTwoSortedArrays solver = new MedianOfTwoSortedArrays();
         for (Integer[][] pair : arrayPairs) {
             Integer[] a1 = pair[0];
             Integer[] a2 = pair[1];

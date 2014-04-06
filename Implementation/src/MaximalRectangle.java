@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/largest-square-of-ones.html
  */
-public class _033014_MaximalRectangle {
+public class MaximalRectangle {
     /* Auxiliary class representing a rectangle */
     private static class Rectangle {
         Rectangle(int w, int h) {
@@ -82,7 +82,7 @@ public class _033014_MaximalRectangle {
                           {'0','0','1','1','1','0','1','1'},
                           {'1','1','1','1','1','1','1','0'},
                           {'0','0','1','1','1','1','1','0'}};
-        _033014_MaximalRectangle solver = new _033014_MaximalRectangle();
+        MaximalRectangle solver = new MaximalRectangle();
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 8; ++j) {
                 System.out.print(A[i][j] + " ");

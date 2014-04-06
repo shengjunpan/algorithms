@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/wildcard-match-star-and-qmark.html
  */
-public class _033014_WildcardMatchStarAndQMark {
+public class WildcardMatchStarAndQMark {
 
     public boolean matched(String s, String t) {
         int m = s.length();
@@ -42,7 +42,7 @@ public class _033014_WildcardMatchStarAndQMark {
         String s = "*ab*cd?y";
         String t1 = "?a*dxy";
         String t2 = "a*x?z";
-        _033014_WildcardMatchStarAndQMark solver = new _033014_WildcardMatchStarAndQMark();
+        WildcardMatchStarAndQMark solver = new WildcardMatchStarAndQMark();
         
         System.out.println(s + " ~ " + t1 + " --> " + solver.matched(s,t1));
         System.out.println(s + " ~ " + t2 + " --> " + solver.matched(s,t2));

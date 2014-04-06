@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-edit-distance.html
  */
-public class _031514_EditDistance {
+public class EditDistance {
     
     public int editDistance(String s, String t) {
         int m = s.length();
@@ -34,7 +34,7 @@ public class _031514_EditDistance {
     public static void main(String[] args) {
         String s = "simple";
         String t = "smpel";
-        _031514_EditDistance solver = new _031514_EditDistance();
+        EditDistance solver = new EditDistance();
         
         int d = solver.editDistance(s, t); 
         System.out.println(s + " ~ " + t + " --> " + d);

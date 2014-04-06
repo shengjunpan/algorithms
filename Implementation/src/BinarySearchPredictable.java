@@ -5,7 +5,7 @@ import java.util.Arrays;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/binary-search-revisited.html
  */
-public class _032014_BinarySearchPredictable {
+public class BinarySearchPredictable {
 
     /* which index to return */
     public enum BSTYPE {
@@ -52,7 +52,7 @@ public class _032014_BinarySearchPredictable {
 
     public static void main(String[] args) {
         Integer[] a = { 1, 2, 2, 2, 2, 2, 3, 4, 5 };
-        _032014_BinarySearchPredictable solver = new _032014_BinarySearchPredictable();
+        BinarySearchPredictable solver = new BinarySearchPredictable();
 
         System.out.println(Arrays.toString(a));
         int query = 2;

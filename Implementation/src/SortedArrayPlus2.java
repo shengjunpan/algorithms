@@ -7,7 +7,7 @@ import java.util.Collections;
  * @author Alan
  * http://decomplexify.blogspot.com/2014/03/algorithm-median-of-sorted-array-with.html
  */
-public class _031814_SortedArrayPlus2 {
+public class SortedArrayPlus2 {
     /**
      * helper: indexing an array plus 2 new elements, but without actually
      * inserting them
@@ -103,7 +103,7 @@ public class _031814_SortedArrayPlus2 {
     private static void middleOfPlus2_oddTest() {
         Integer[] a = {0, 10, 20};
         Integer[] eList = {-5, 5, 15, 25};
-        _031814_SortedArrayPlus2 solver = new _031814_SortedArrayPlus2();
+        SortedArrayPlus2 solver = new SortedArrayPlus2();
 
         System.out.println("--------------");
         for (int i1 = 0; i1 < 4; ++i1) {
@@ -122,7 +122,7 @@ public class _031814_SortedArrayPlus2 {
         Integer[] a = {0, 10};
         Integer[] eList = {-5, 5, 15, 25};
         
-        _031814_SortedArrayPlus2 solver = new _031814_SortedArrayPlus2();
+        SortedArrayPlus2 solver = new SortedArrayPlus2();
         
         System.out.println("--------------");
         for (int i1 = 0; i1 < eList.length; ++i1) {

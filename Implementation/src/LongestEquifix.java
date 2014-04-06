@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/longest-equifix.html
  */
-public class _032314_LongestEquifix {
+public class LongestEquifix {
     /**
      * 
      * @param s
@@ -51,7 +51,7 @@ public class _032314_LongestEquifix {
     }
  
     public static void main(String[] args) {
-        _032314_LongestEquifix solver = new _032314_LongestEquifix();
+        LongestEquifix solver = new LongestEquifix();
         String[] strings = { "abcxyzabc", "abcabca" };
         for (String s : strings) {
             System.out.println("---------");

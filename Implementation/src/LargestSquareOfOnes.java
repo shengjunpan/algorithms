@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/largest-square-of-ones.html
  */
-public class _032114_LargestSquareOfOnes {
+public class LargestSquareOfOnes {
 
     /**
      * 
@@ -11,7 +11,7 @@ public class _032114_LargestSquareOfOnes {
      *            a 2D matrix of '0's and '1's.
      * @return the side of the largest square of '1's.
      */
-    public int LargestSquareOfOnes(char[][] A) {
+    public int largestSquareOfOnes(char[][] A) {
         int m = A.length; // rows
         int n = A[0].length; // columns
 
@@ -59,14 +59,14 @@ public class _032114_LargestSquareOfOnes {
                           {'0','0','1','1','1','0','1','1'},
                           {'1','1','1','1','1','1','1','0'},
                           {'0','0','1','1','1','1','0','0'}};
-        _032114_LargestSquareOfOnes solver = new _032114_LargestSquareOfOnes();
+        LargestSquareOfOnes solver = new LargestSquareOfOnes();
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 8; ++j) {
                 System.out.print(A[i][j] + " ");
             }
             System.out.println();
         }
-        int max_side = solver.LargestSquareOfOnes(A);
+        int max_side = solver.largestSquareOfOnes(A);
         System.out.println("Max square side: " + max_side);
     }
 }

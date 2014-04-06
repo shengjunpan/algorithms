@@ -4,7 +4,7 @@ import java.util.Arrays;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-max-interval-sum.html
  */
-public class _031314_MaxIntervalSum {
+public class MaxIntervalSum {
     /**
      * helper class representing an interval
      * @author Alan
@@ -30,7 +30,7 @@ public class _031314_MaxIntervalSum {
         public String toString() { return "["+from+","+to+") "+sum; }
     }
 
-    public Interval MaxIntervalSum(int[] a, boolean allowEmpty) {
+    public Interval maxIntervalSum(int[] a, boolean allowEmpty) {
         // global max interval
         Interval result;
         
@@ -67,9 +67,9 @@ public class _031314_MaxIntervalSum {
     
     public static void main(String[] args) {
         int[][] arrays = {{}, {0}, {1}, {-1}, {-2,1,-3,4,-1,2,1,-5,4}};
-        _031314_MaxIntervalSum solver = new _031314_MaxIntervalSum();
+        MaxIntervalSum solver = new MaxIntervalSum();
         for (int[] a : arrays) {
-            Interval result = solver.MaxIntervalSum(a, false);
+            Interval result = solver.maxIntervalSum(a, false);
             System.out.println(Arrays.toString(a) + " --> " + result);
         }
 

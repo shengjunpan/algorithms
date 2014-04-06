@@ -3,7 +3,7 @@
  * @author Alan
  * http://decomplexify.blogspot.com/2014/03/kmp-algorithm.html
  */
-public class _032514_KMP {
+public class KMP {
 
     /**
      * Input parameters and local variables may not conform to Java naming
@@ -15,7 +15,7 @@ public class _032514_KMP {
      *            Document
      * @return the starting index of the matched substring, -1 if not found
      */
-    public int KMP(String q, String D) {
+    public int IndexOfByKMP(String q, String D) {
         int m = q.length();
         int n = D.length();
 
@@ -23,7 +23,7 @@ public class _032514_KMP {
         if (m == 0) { return 0; }
         if (m > n) { return -1; }
 
-        _032314_LongestEquifix equiSolver = new _032314_LongestEquifix();
+        LongestEquifix equiSolver = new LongestEquifix();
         // E[i] holds the length of the longest equifix of q[0..i].
         int[] E = equiSolver.getEquifixLength(q);
 
@@ -63,10 +63,10 @@ public class _032514_KMP {
     public static void main(String[] args) {
         String document = "zzabcxyzabc";
         String[] queries = {"bcx", "xyzc"};
-        _032514_KMP solver = new _032514_KMP();
+        KMP solver = new KMP();
         
         for (String query : queries) {
-            int index = solver.KMP(query, document);
+            int index = solver.IndexOfByKMP(query, document);
             System.out.println(query + " in " + document + "? " + index);
         }
     }

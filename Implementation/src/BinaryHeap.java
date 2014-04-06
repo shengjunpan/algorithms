@@ -6,10 +6,10 @@ import java.util.Comparator;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-binary-heap.html
  */
-public class _031014_BinaryHeap<T extends Comparable<T>> {
+public class BinaryHeap<T extends Comparable<T>> {
 
-    _031014_BinaryHeap() { comparator = null; }
-    _031014_BinaryHeap(Comparator<T> c) { comparator = c; }
+    BinaryHeap() { comparator = null; }
+    BinaryHeap(Comparator<T> c) { comparator = c; }
     
     // simple methods
     public T top() { return nodes.get(0); }
@@ -111,7 +111,7 @@ public class _031014_BinaryHeap<T extends Comparable<T>> {
 /////////////////////////////////////////////////////////////////////
 
     private static void pushTest() {
-        _031014_BinaryHeap<Integer> heap = new _031014_BinaryHeap<>();
+        BinaryHeap<Integer> heap = new BinaryHeap<>();
         int[] values = {1,5,3,7,7,4,6,8,8,8,9,5,5,8,7,9,8,8};
         for (int v : values) {
             heap.nodes.add(v);
@@ -126,7 +126,7 @@ public class _031014_BinaryHeap<T extends Comparable<T>> {
     }
     
     private static void popTest() {
-        _031014_BinaryHeap<Integer> heap = new _031014_BinaryHeap<>();
+        BinaryHeap<Integer> heap = new BinaryHeap<>();
         int[] values = {1,5,3,7,7,4,6,8,8,8,9,9,8,8,7,9,8,8};
         for (int v : values) {
             heap.nodes.add(v);

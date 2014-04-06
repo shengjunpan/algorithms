@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-string-matching-with-wild.html
  */
-public class _031614_WildcardMatchStarOnly {
+public class WildcardMatchStarOnly {
     
     public boolean matched(String s, String t) {
         int m = s.length();
@@ -41,7 +41,7 @@ public class _031614_WildcardMatchStarOnly {
         String s = "abcd";
         String t1 = "*b*d";
         String t2 = "a*e*";
-        _031614_WildcardMatchStarOnly solver = new _031614_WildcardMatchStarOnly();
+        WildcardMatchStarOnly solver = new WildcardMatchStarOnly();
         
         System.out.println(s + " ~ " + t1 + " --> " + solver.matched(s,t1));
         System.out.println(s + " ~ " + t2 + " --> " + solver.matched(s,t2));

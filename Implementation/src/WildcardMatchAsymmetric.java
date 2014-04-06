@@ -3,7 +3,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/04/wildcard-match-star-and-qmark-asymmetric.html
  */
-public class _040214_WildcardMatchAsymmetric {
+public class WildcardMatchAsymmetric {
     
     /**
      * Helper: matching with only question marks in t. If t has no no question
@@ -30,16 +30,16 @@ public class _040214_WildcardMatchAsymmetric {
            
     public boolean matched(String s, String t) {
         // remove stars from t, splitting t into pieces
-        String[] tPieces = t.split("\\*+",-1);
+        String[] P = t.split("\\*+",-1);
         
         // special case: t has no star
-        if (tPieces.length == 1) {
+        if (P.length == 1) {
             return matchedWithQMark(s, t, 0) &&
                     s.length() == t.length();
         }
         
-        String head = tPieces[0];
-        String tail = tPieces[tPieces.length - 1];
+        String head = P[0];
+        String tail = P[P.length - 1];
         
         // special case: can't match both first and last
         // pieces without them overlapping
@@ -49,7 +49,7 @@ public class _040214_WildcardMatchAsymmetric {
             return false;
         }
 
-        int n = tPieces.length;
+        int n = P.length;
 
         // special case: no more pieces; it's a match
         if (n == 2) { return true; }
@@ -62,11 +62,11 @@ public class _040214_WildcardMatchAsymmetric {
         // index for the next piece
         int i = 1;
         
-        for (; i< tPieces.length - 1; ++i) {
-            int tLen = tPieces[i].length();
+        for (; i< P.length - 1; ++i) {
+            int tLen = P[i].length();
             boolean found = false;
             while (start <= sLen - tLen) {
-                if (matchedWithQMark(s, tPieces[i], start)) {
+                if (matchedWithQMark(s, P[i], start)) {
                     found = true;
                     break;
                 }
@@ -79,7 +79,7 @@ public class _040214_WildcardMatchAsymmetric {
             start += tLen;
         }
         // value of i is the number of pieces matched so far
-        return i >= tPieces.length - 1;
+        return i >= P.length - 1;
     }
      
     public static void matchedWithQMarkTest() {
@@ -105,7 +105,7 @@ public class _040214_WildcardMatchAsymmetric {
                 {"abbabaaabbabbaababbabbbbb", "abba*aabba?ba*ab?b?**a?b?b*b*" },
                 {"abbabaaabbabbaababbabbbbb", "*abb?ba?ab*bbb*baa?abba?bb*bb" },
                 };
-        _040214_WildcardMatchAsymmetric solver = new _040214_WildcardMatchAsymmetric();        
+        WildcardMatchAsymmetric solver = new WildcardMatchAsymmetric();        
 
         System.out.println("-----------");
         for (String[] st : sts) {

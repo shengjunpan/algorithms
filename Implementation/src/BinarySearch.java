@@ -5,7 +5,7 @@ import java.util.Arrays;
  * @author Alan
  * http://decomplexify.blogspot.com/2014/03/algorithm-binary-search.html
  */
-public class _030514_BinarySearch {
+public class BinarySearch {
     /**
      * 
      * @param a
@@ -40,7 +40,7 @@ public class _030514_BinarySearch {
     }
 
     public static void main(String[] args) {
-        _030514_BinarySearch solver = new _030514_BinarySearch();
+        BinarySearch solver = new BinarySearch();
         
         Integer[] a = { 0, 2, 4, 6, 8 };
         System.out.println("a: " + Arrays.toString(a));
