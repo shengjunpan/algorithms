@@ -1,4 +1,3 @@
-
 /**
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/04/wildcard-match-star-and-qmark-asymmetric.html

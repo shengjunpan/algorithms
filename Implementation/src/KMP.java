@@ -1,4 +1,3 @@
-
 /**
  * @author Alan
  * http://decomplexify.blogspot.com/2014/03/kmp-algorithm.html
