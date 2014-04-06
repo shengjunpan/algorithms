@@ -2,7 +2,7 @@
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/largest-square-of-ones.html
  */
-public class MaximalRectangle {
+public class LargestRectOfOnes {
     /* Auxiliary class representing a rectangle */
     private static class Rectangle {
         Rectangle(int w, int h) {
@@ -18,9 +18,9 @@ public class MaximalRectangle {
      * 
      * @param A
      *            a 2D matrix of '0's and '1's.
-     * @return the side of the largest square of '1's.
+     * @return the area of the largest square of '1's.
      */
-    public int maximalRectangle(char[][] A) {
+    public int largestRectOfOnes(char[][] A) {
         int m = A.length; // rows
         if (m == 0) { return 0; }
 
@@ -81,14 +81,14 @@ public class MaximalRectangle {
                           {'0','0','1','1','1','0','1','1'},
                           {'1','1','1','1','1','1','1','0'},
                           {'0','0','1','1','1','1','1','0'}};
-        MaximalRectangle solver = new MaximalRectangle();
+        LargestRectOfOnes solver = new LargestRectOfOnes();
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 8; ++j) {
                 System.out.print(A[i][j] + " ");
             }
             System.out.println();
         }
-        int maxArea = solver.maximalRectangle(A);
+        int maxArea = solver.largestRectOfOnes(A);
         System.out.println("Max rectangle area: " + maxArea);
     }
 }
