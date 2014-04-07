@@ -31,9 +31,6 @@ public class BinaryHeap<T extends Comparable<T>> {
         nodes.set(0, nodes.get(lastIndex));
         nodes.remove(lastIndex);
         
-        System.out.println("before moved down:");
-        System.out.println(this);
-        
         moveDown(0);
         
         return topValue;
@@ -41,7 +38,7 @@ public class BinaryHeap<T extends Comparable<T>> {
     
     // iteratively swap nodes[i] with its parent
     // until it's not smaller than its parent
-    private void moveUp(int i) {
+    protected int moveUp(int i) {
         while (i > 0) {
             int p = (i-1)/2;
          
@@ -49,17 +46,18 @@ public class BinaryHeap<T extends Comparable<T>> {
             Collections.swap(nodes, i, p);
             i = p;
           }
+        return i;
     }
     // iteratively swap nodes[i] with a smaller child
     // until it's not larger than than either
-    private void moveDown(int i) {
+    protected int moveDown(int i) {
         while (true) {
             // child indices
             int L = 2*i+1, R = 2*i+2;
 
             if (L >= nodes.size()) {
                 // current node is a leaf
-                return;
+                break;
             }
             
             // find out which child is smaller
@@ -73,9 +71,10 @@ public class BinaryHeap<T extends Comparable<T>> {
                 Collections.swap(nodes, smallerChild, i);
                 i = smallerChild;
             } else {
-                return;
+                break;
             }
         } // while
+        return i;
     }
     
     // comparison method for convenience
@@ -89,9 +88,12 @@ public class BinaryHeap<T extends Comparable<T>> {
         }
     }
     
-    private ArrayList<T> nodes = new ArrayList<>();
-    private Comparator<T> comparator = null;
+    protected ArrayList<T> nodes = new ArrayList<>();
+    protected Comparator<T> comparator = null;
     
+    /**
+     * print nodes by level, mainly for debugging purpose
+     */
     public String toString() {
         StringBuffer result = new StringBuffer();
         int limit = 1;
