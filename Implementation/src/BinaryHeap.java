@@ -80,7 +80,7 @@ public class BinaryHeap<T extends Comparable<T>> {
         if (R < nodes.size() && compareNodes(L, R) > 0) {
                 smallerChild = R;
         }
-            
+
         // swap with the smaller child if necessary
         if (compareNodes(i, smallerChild) > 0) {
             Collections.swap(nodes, smallerChild, i);

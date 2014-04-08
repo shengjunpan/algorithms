@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import util.ValueWithPriority;
 
 /**
  * @author Alan
@@ -30,14 +31,25 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
         // find the index of the value to be inserted
         Integer i = valueLocation.get(vp.value);
         
-        // if it's a new value add a new node
         if (i == null) {
+            // if it's a new value add a new node
             nodes.add(vp);
             i = nodes.size() - 1;
             valueLocation.put(vp.value, i);
+        } else {
+            // if it exists, try move it down first
+            nodes.set(i, vp);                   
+            while ( i != null) {
+                Integer p = swapWithSmallerChild(i);
+                if (p != null ) {
+                    valueLocation.put(nodes.get(p).value, p);
+                    valueLocation.put(nodes.get(i).value, i);
+                }
+                i = p;
+            }     
         }
 
-        // move the new node up to its proper location
+        // move the node up to its proper location
         while (i != null ) {
             Integer p = swapWithParent(i);
             if (p != null) {
@@ -75,7 +87,7 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
 
 /////////////////////////////////////////////////////////////////////
 
-    private static void pushTest() {
+    private static void pushNewTest() {
         BinaryPriorityQueue<String, Integer> pQueue = new BinaryPriorityQueue<>();
         String[] values = {"1","5","3","7a","7b","4","6","8a","8b","8c",
                             "9a","5a","5b","8d","7c","9b","8e","8f"};
@@ -90,6 +102,26 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
 
         String newValue = "6b";
         int newPriority = 6;
+        pQueue.push(newValue, newPriority);
+        System.out.println("pushed " + newValue + " with priority " + newPriority);
+        System.out.println(pQueue);
+    }
+
+    private static void pushExistedTest() {
+        BinaryPriorityQueue<String, Integer> pQueue = new BinaryPriorityQueue<>();
+        String[] values = {"1","5","3","7a","7b","4","6","8a","8b","8c",
+                            "9a","5a","5b","8d","7c","9b","8e","8f"};
+        Integer[] priorities = {1, 5, 3, 7, 7, 4, 6, 8, 8, 8, 9, 5, 5, 8, 7, 9, 8, 8};
+        for (int i =0; i < values.length; ++i) {
+            pQueue.nodes.add(new ValueWithPriority<String, Integer>(values[i], priorities[i]));
+            pQueue.valueLocation.put(values[i], i);
+        }
+
+        System.out.println("before:");
+        System.out.println(pQueue);
+
+        String newValue = "1"; // actually old
+        int newPriority = 7;
         pQueue.push(newValue, newPriority);
         System.out.println("pushed " + newValue + " with priority " + newPriority);
         System.out.println(pQueue);
@@ -115,7 +147,8 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
     }
 
     public static void main(String[] args) {
-        pushTest();
+        pushNewTest();
+        pushExistedTest();
         popTest();
     }
 }
