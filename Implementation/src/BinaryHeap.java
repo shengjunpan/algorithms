@@ -19,62 +19,74 @@ public class BinaryHeap<T extends Comparable<T>> {
     // push a new value
     public void push(T value) {
         nodes.add(value);
-        moveUp(nodes.size()-1);
+        
+        // move the last node up its proper position
+        Integer i = nodes.size()-1;
+        while ( i != null ) {
+            i = swapWithParent(i);
+        }
     }
     
     // remove top value
     public T pop() {
         if (nodes.isEmpty()) { return null; }       
         T topValue = nodes.get(0);
-        
+
+        // put the value of the last node inside the
+        // root node then delete the last node
         int lastIndex = nodes.size() - 1;
         nodes.set(0, nodes.get(lastIndex));
         nodes.remove(lastIndex);
         
-        moveDown(0);
+        // move the root down to its proper position
+        Integer i = 0;
+        while ( i != null ) {
+            i = swapWithSmallerChild(i);
+        }
         
         return topValue;
     }
     
-    // iteratively swap nodes[i] with its parent
-    // until it's not smaller than its parent
-    protected int moveUp(int i) {
-        while (i > 0) {
-            int p = (i-1)/2;
-         
-            if (compareNodes(i, p) >= 0) { break; }
+    /**
+     * helper: swap a node with its parent if parent is larger
+     * @param i index of current node
+     * @return index of parent if swapped, null otherwise
+     */
+    protected Integer swapWithParent(int i) {
+        int p = (i-1)/2;
+        if (p >=0 && compareNodes(p, i) > 0) {
             Collections.swap(nodes, i, p);
-            i = p;
-          }
-        return i;
+            return p;
+        }
+        return null;
     }
-    // iteratively swap nodes[i] with a smaller child
-    // until it's not larger than than either
-    protected int moveDown(int i) {
-        while (true) {
-            // child indices
-            int L = 2*i+1, R = 2*i+2;
 
-            if (L >= nodes.size()) {
-                // current node is a leaf
-                break;
-            }
-            
-            // find out which child is smaller
-            int smallerChild = L;
-            if (R < nodes.size() && compareNodes(R, L) < 0) {
+    /**
+     * helper: swap a node with its smaller child.
+     * @param i index of current node
+     * @return index of smaller child if swapped, -1 otherwise
+     */
+    protected Integer swapWithSmallerChild(int i) {
+        // child indices
+        int L = 2*i+1;
+        if (L >= nodes.size()) {
+            // current node is a leaf
+            return null;
+        }
+
+        // find out which child is smaller
+        int smallerChild = L;        
+        int R = L + 1;
+        if (R < nodes.size() && compareNodes(L, R) > 0) {
                 smallerChild = R;
-            }
+        }
             
-            // swap with the smaller child if necessary
-            if (compareNodes(smallerChild, i) < 0) {
-                Collections.swap(nodes, smallerChild, i);
-                i = smallerChild;
-            } else {
-                break;
-            }
-        } // while
-        return i;
+        // swap with the smaller child if necessary
+        if (compareNodes(i, smallerChild) > 0) {
+            Collections.swap(nodes, smallerChild, i);
+            return  smallerChild;
+        }
+        return null;
     }
     
     // comparison method for convenience
@@ -140,6 +152,7 @@ public class BinaryHeap<T extends Comparable<T>> {
         System.out.println("popped:");
         System.out.println(heap);        
     }
+    
     public static void main(String[] args) {
         pushTest();
         popTest();
