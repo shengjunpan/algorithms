@@ -84,7 +84,6 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
             }
             i = p;
         }
-        
         return topValue;
     }
 
