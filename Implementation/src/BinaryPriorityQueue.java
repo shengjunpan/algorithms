@@ -1,12 +1,12 @@
 import java.util.HashMap;
-import util.ValueWithPriority;
+import util.WeightedValue;
 
 /**
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-priority-queue.html
  */
-public class BinaryPriorityQueue<T,P extends Comparable<P>>
-        extends BinaryHeap<ValueWithPriority<T,P>> {
+public class BinaryPriorityQueue<T,W extends Comparable<W>>
+        extends BinaryHeap<WeightedValue<T,W>> {
 
     private HashMap<T, Integer> valueLocation = new HashMap<>();
     
@@ -17,9 +17,9 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
      * @param priority
      * @return whether the value was inserted or updated 
      */
-    public boolean push(T value, P priority) {
+    public boolean push(T value, W priority) {
         boolean existed = valueLocation.containsKey(value);
-        push(new ValueWithPriority<>(value, priority));
+        push(new WeightedValue<>(value, priority));
         return existed;
     }
     
@@ -27,7 +27,7 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
      * Override the parent method `push'
      */
     @Override
-    public void push(ValueWithPriority<T,P> vp) {       
+    public void push(WeightedValue<T,W> vp) {       
         // find the index of the value to be inserted
         Integer i = valueLocation.get(vp.value);
         
@@ -64,9 +64,9 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
     }
     
     // remove top value
-    public ValueWithPriority<T,P> pop() {
+    public WeightedValue<T,W> pop() {
         if (nodes.isEmpty()) { return null; }       
-        ValueWithPriority<T,P> topValue = nodes.get(0);
+        WeightedValue<T,W> topValue = nodes.get(0);
 
         // put the value of the last node inside the
         // root node then delete the last node
@@ -96,10 +96,11 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
                             "9a","5a","5b","8d","7c","9b","8e","8f"};
         Integer[] priorities = {1, 5, 3, 7, 7, 4, 6, 8, 8, 8, 9, 5, 5, 8, 7, 9, 8, 8};
         for (int i =0; i < values.length; ++i) {
-            pQueue.nodes.add(new ValueWithPriority<String, Integer>(values[i], priorities[i]));
+            pQueue.nodes.add(new WeightedValue<String, Integer>(values[i], priorities[i]));
             pQueue.valueLocation.put(values[i], i);
         }
 
+        System.out.println("---------------");
         System.out.println("before:");
         System.out.println(pQueue);
 
@@ -116,10 +117,10 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
                             "9a","5a","5b","8d","7c","9b","8e","8f"};
         Integer[] priorities = {1, 5, 3, 7, 7, 4, 6, 8, 8, 8, 9, 5, 5, 8, 7, 9, 8, 8};
         for (int i =0; i < values.length; ++i) {
-            pQueue.nodes.add(new ValueWithPriority<String, Integer>(values[i], priorities[i]));
+            pQueue.nodes.add(new WeightedValue<String, Integer>(values[i], priorities[i]));
             pQueue.valueLocation.put(values[i], i);
         }
-
+        System.out.println("---------------");
         System.out.println("before:");
         System.out.println(pQueue);
 
@@ -142,10 +143,11 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
                            "9a","9b","8d","8e","7c","9c","8f","8g"};
         Integer[] priorities = { 1, 5, 3, 7, 7, 4, 6, 8, 8, 8, 9, 9, 8, 8, 7, 9, 8, 8 };
         for (int i =0; i < values.length; ++i) {
-            pQueue.nodes.add(new ValueWithPriority<String, Integer>(values[i], priorities[i]));
+            pQueue.nodes.add(new WeightedValue<String, Integer>(values[i], priorities[i]));
             pQueue.valueLocation.put(values[i], i);
         }
 
+        System.out.println("---------------");
         System.out.println("before:");
         System.out.println(pQueue);
 
@@ -158,6 +160,6 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
     public static void main(String[] args) {
         pushNewTest();
         pushExistedTest();
-        // popTest();
+        popTest();
     }
 }
