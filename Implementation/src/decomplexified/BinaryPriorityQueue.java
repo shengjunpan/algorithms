@@ -1,5 +1,7 @@
+package decomplexified;
 import java.util.HashMap;
-import util.WeightedValue;
+
+import decomplexified.util.WeightedValue;
 
 /**
  * @author Alan

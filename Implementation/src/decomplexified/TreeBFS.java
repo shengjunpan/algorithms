@@ -1,5 +1,7 @@
+package decomplexified;
 import java.util.LinkedList;
-import util.TreeNode;
+
+import decomplexified.util.TreeNode;
 
 /**
  * @author Alan

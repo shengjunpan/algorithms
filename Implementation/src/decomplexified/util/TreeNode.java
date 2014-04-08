@@ -1,11 +1,11 @@
-package util;
+package decomplexified.util;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Class representing a node (no parent access) in a binary tree
  * @author Alan
- *
+ *  Class representing a node (no parent access) in a binary tree
  */
 public class TreeNode<T> {
     public TreeNode<T> left;
