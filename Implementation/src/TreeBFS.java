@@ -1,0 +1,66 @@
+import java.util.LinkedList;
+import util.TreeNode;
+
+/**
+ * @author Alan
+ *  http://decomplexify.blogspot.com/2014/03/algorithm-bfs.html
+ */
+public abstract class TreeBFS<T> {
+
+    // action to be defined
+    public abstract void Process(TreeNode<T> node);
+    
+    public void traverse(TreeNode<T> root) {
+        // if the tree is empty do nothing
+        if (root == null) { return; }
+        
+        // an FIFO queue to remember visited nodes
+        LinkedList<TreeNode<T>> visited = new LinkedList<>();
+        visited.addFirst(root);
+        Process(root);
+
+        while (!visited.isEmpty()) {
+            // take out the oldest node
+            TreeNode<T> node = visited.pollLast();
+            
+            // add children to the queue
+            if (node.left != null) {
+                visited.addFirst(node.left);
+                Process(node.left);
+            }
+            if (node.right != null) {
+                visited.addFirst(node.right);
+                Process(node.right);
+            }
+        }
+    }
+
+    /**
+     * Example showing how to use BFS to print a binary tree
+     */
+    public static void main(String[] args) {
+        Integer[][] family = {{0,1,2},{1,3,4},{2,5,6},{4,7,8},{6,9,null}};
+        Integer[] values = {0,1,2,3,4,5,6,7,8,9};
+        TreeNode<Integer> root = TreeNode.buildTree(values, family);
+
+        // Create a BFS object defining how to process a node
+        TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
+            @Override
+            public void Process(TreeNode<Integer> node) {
+                if (node == null) {
+                    System.out.println("null");
+                    return;
+                }
+                System.out.print(node);
+                if (node.left != null || node.right != null) {
+                    System.out.print(" ->");
+                    System.out.print(node.left == null ? " null" : " " + node.left);
+                    System.out.print(node.right == null ? " null" : " " +  node.right);
+                }
+                System.out.println();
+            }
+        };
+        bfs.traverse(root);
+    }
+
+}
