@@ -8,14 +8,14 @@ import java.util.LinkedList;
  *
  */
 public class TreeNode<T> {
-    TreeNode(T x) { value = x; }
-    TreeNode(T x, int id) { value = x; this.id = id; }
-    
     public TreeNode<T> left;
     public TreeNode<T> right;
     public T value;
 
     private Integer id;
+    
+    TreeNode(T x) { value = x; }
+    TreeNode(T x, int id) { value = x; this.id = id; }
     
     public String toString() {
         if (id == null) {
