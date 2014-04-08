@@ -1,6 +1,6 @@
 package decomplexified;
-import java.util.LinkedList;
 
+import java.util.LinkedList;
 import decomplexified.util.TreeNode;
 
 /**
@@ -46,10 +46,6 @@ public abstract class TreeBFS<T> {
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
             public void Process(TreeNode<Integer> node) {
-                if (node == null) {
-                    System.out.println("null");
-                    return;
-                }
                 System.out.print(node);
                 if (node.left != null || node.right != null) {
                     System.out.print(" ->");

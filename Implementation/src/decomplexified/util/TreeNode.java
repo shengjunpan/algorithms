@@ -2,6 +2,7 @@ package decomplexified.util;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import decomplexified.TreeBFS;
 
 /**
  * @author Alan
@@ -70,6 +71,14 @@ public class TreeNode<T> {
         Integer[][] family = {{0,1,2},{1,3,4},{2,5,null},{4,6,7}};
         Integer[] values = {0,1,2,3,4,5,6,7};
         TreeNode<Integer> root = TreeNode.buildTree(values, family);
-        System.out.println(root.printTree());
+
+        // Create a BFS object where `process' means `print'
+        TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
+            @Override
+            public void Process(TreeNode<Integer> node) {
+                System.out.println(node.printFamily());
+            }
+        };
+        bfs.traverse(root);
     }
 }
