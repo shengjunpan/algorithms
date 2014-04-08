@@ -37,20 +37,23 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
             i = nodes.size() - 1;
             valueLocation.put(vp.value, i);
         } else {
-            // if it exists, try move it down first
-            nodes.set(i, vp);                   
-            while ( i != null) {
+            // if it exists, reset its priority
+            nodes.set(i, vp);
+
+            // attempt to move it down first. Note that we don't
+            // use i!=null for while-condition so as to keep i
+            // in case no swap is done.
+            while (true) {
                 Integer p = swapWithSmallerChild(i);
-                if (p != null ) {
-                    valueLocation.put(nodes.get(p).value, p);
-                    valueLocation.put(nodes.get(i).value, i);
-                }
+                if (p == null) { break; }
+                valueLocation.put(nodes.get(p).value, p);
+                valueLocation.put(nodes.get(i).value, i);
                 i = p;
-            }     
+            }
         }
 
         // move the node up to its proper location
-        while (i != null ) {
+        while (i != null) {
             Integer p = swapWithParent(i);
             if (p != null) {
                 valueLocation.put(nodes.get(p).value, p);
@@ -123,8 +126,14 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
         String newValue = "1"; // actually old
         int newPriority = 7;
         pQueue.push(newValue, newPriority);
-        System.out.println("pushed " + newValue + " with priority " + newPriority);
+        System.out.println("reset " + newValue + " with priority " + newPriority);
         System.out.println(pQueue);
+
+        newPriority = 1;
+        pQueue.push(newValue, newPriority);
+        System.out.println("reset " + newValue + " with priority " + newPriority);
+        System.out.println(pQueue);
+
     }
 
     private static void popTest() {
@@ -149,6 +158,6 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
     public static void main(String[] args) {
         pushNewTest();
         pushExistedTest();
-        popTest();
+        // popTest();
     }
 }
