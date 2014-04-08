@@ -6,20 +6,20 @@ package util;
 public class WeightedValue<T, W extends Comparable<W>>
         implements Comparable<WeightedValue<T, W>> {
     public T value;
-    public W priority;
+    public W weight;
 
     public WeightedValue() { }
     
     public WeightedValue(T v) { value = v; }
     
-    public WeightedValue(T v, W p) {
+    public WeightedValue(T v, W w) {
         value = v;
-        priority = p;
+        weight = w;
     }
     
     @Override
     public int compareTo(WeightedValue<T,W> vp2) {
-        return priority.compareTo(vp2.priority);
+        return weight.compareTo(vp2.weight);
     }
     
     @Override
@@ -31,6 +31,6 @@ public class WeightedValue<T, W extends Comparable<W>>
     
     @Override
     public String toString() {
-        return "[" + value + "]" + priority;
+        return "[" + value + "]" + weight;
     }
 }
