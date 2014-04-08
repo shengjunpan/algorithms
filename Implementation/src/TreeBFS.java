@@ -17,22 +17,19 @@ public abstract class TreeBFS<T> {
         // an FIFO queue to remember visited nodes
         LinkedList<TreeNode<T>> visited = new LinkedList<>();
         visited.addFirst(root);
-        Process(root);
 
         while (!visited.isEmpty()) {
             // take out the oldest node
             TreeNode<T> node = visited.pollLast();
             
+            // Process a node when it's out of the queue. Alternatively
+            // we could process it when adding it to the queue
+            Process(node);
+            
             // add children to the queue
-            if (node.left != null) {
-                visited.addFirst(node.left);
-                Process(node.left);
-            }
-            if (node.right != null) {
-                visited.addFirst(node.right);
-                Process(node.right);
-            }
-        }
+            if (node.left != null) { visited.addFirst(node.left); }
+            if (node.right != null) { visited.addFirst(node.right); }
+        } // while
     }
 
     /**
@@ -43,7 +40,7 @@ public abstract class TreeBFS<T> {
         Integer[] values = {0,1,2,3,4,5,6,7,8,9};
         TreeNode<Integer> root = TreeNode.buildTree(values, family);
 
-        // Create a BFS object defining how to process a node
+        // Create a BFS object where `process' means `print'
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
             public void Process(TreeNode<Integer> node) {
