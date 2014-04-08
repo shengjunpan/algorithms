@@ -46,6 +46,7 @@ public abstract class TreeBFS<T> {
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
             public void Process(TreeNode<Integer> node) {
+                // print a node and its children
                 System.out.println(node.familyToString());
             }
         };
