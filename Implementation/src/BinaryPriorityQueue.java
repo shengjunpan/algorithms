@@ -22,10 +22,10 @@ public class BinaryPriorityQueue<T,P extends Comparable<P>>
         return existed;
     }
     
-    @Override
     /**
      * Override the parent method `push'
      */
+    @Override
     public void push(ValueWithPriority<T,P> vp) {       
         // find the index of the value to be inserted
         Integer i = valueLocation.get(vp.value);
