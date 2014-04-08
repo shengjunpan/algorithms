@@ -46,13 +46,7 @@ public abstract class TreeBFS<T> {
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
             public void Process(TreeNode<Integer> node) {
-                System.out.print(node);
-                if (node.left != null || node.right != null) {
-                    System.out.print(" ->");
-                    System.out.print(node.left == null ? " null" : " " + node.left);
-                    System.out.print(node.right == null ? " null" : " " +  node.right);
-                }
-                System.out.println();
+                System.out.println(node.familyToString());
             }
         };
         bfs.traverse(root);

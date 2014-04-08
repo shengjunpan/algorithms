@@ -26,7 +26,7 @@ public class TreeNode<T> {
         }
     }
     
-    public String printFamily() {
+    public String familyToString() {
         StringBuffer output = new StringBuffer();
         output.append(this);
         if (left != null || right != null) {
@@ -44,7 +44,7 @@ public class TreeNode<T> {
         StringBuffer output = new StringBuffer();
         while (!visited.isEmpty()) {
             TreeNode<T> node = visited.pollLast();
-            output.append(node.printFamily());
+            output.append(node.familyToString());
             output.append("\n");
             if (node.left != null) { visited.addFirst(node.left); }
             if (node.right != null) { visited.addFirst(node.right); }
@@ -76,7 +76,7 @@ public class TreeNode<T> {
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
             public void Process(TreeNode<Integer> node) {
-                System.out.println(node.printFamily());
+                System.out.println(node.familyToString());
             }
         };
         bfs.traverse(root);
