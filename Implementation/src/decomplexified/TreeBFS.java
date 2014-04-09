@@ -9,8 +9,9 @@ import decomplexified.util.TreeNode;
  */
 public abstract class TreeBFS<T> {
 
-    // action to be defined
-    public abstract void Process(TreeNode<T> node);
+    // action to be defined for BFS traversal. If the returned
+    // value is false, terminate the traversal
+    public abstract boolean Process(TreeNode<T> node);
     
     public void traverse(TreeNode<T> root) {
         // if the tree is empty do nothing
@@ -19,18 +20,21 @@ public abstract class TreeBFS<T> {
         // an FIFO queue to remember visited nodes
         LinkedList<TreeNode<T>> visited = new LinkedList<>();
         visited.addFirst(root);
+        if (!Process(root)) { return; }
 
         while (!visited.isEmpty()) {
             // take out the oldest node
             TreeNode<T> node = visited.pollLast();
             
-            // Process a node when it's out of the queue. Alternatively
-            // we could process it when adding it to the queue
-            Process(node);
-            
             // add children to the queue
-            if (node.left != null) { visited.addFirst(node.left); }
-            if (node.right != null) { visited.addFirst(node.right); }
+            if (node.left != null) {
+                visited.addFirst(node.left);
+                if (!Process(node.left)) { return; }
+            }
+            if (node.right != null) {
+                visited.addFirst(node.right);
+                if (!Process(node.right)) { return; }
+            }
         } // while
     }
 
@@ -45,9 +49,10 @@ public abstract class TreeBFS<T> {
         // Create a BFS object where `process' means `print'
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
-            public void Process(TreeNode<Integer> node) {
+            public boolean Process(TreeNode<Integer> node) {
                 // print a node and its children
                 System.out.println(node.familyToString());
+                return true;
             }
         };
         bfs.traverse(root);
