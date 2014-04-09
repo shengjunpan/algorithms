@@ -18,7 +18,7 @@ public class UnweightedDijsktra<T> extends GraphBFS<T> {
     @Override
     protected boolean process(GraphNode<T> node) {
         if (parentNode == null) {
-            distances.put(node, node == source ? 0 : Integer.MAX_VALUE);
+            distances.put(node, node == source ? 0 : null);
         } else {
             int parentDistance = distances.get(parentNode);
             distances.put(node, parentDistance + 1);
@@ -30,7 +30,7 @@ public class UnweightedDijsktra<T> extends GraphBFS<T> {
      * @return distance from node s to node t
      */
     public Integer getDistance(GraphNode<T> s, GraphNode<T> t) {
-        // set source and sink  and that `Process' can access them.
+        // set source and sink so that `Process' can access them.
         source = s;
         sink = t;
         
