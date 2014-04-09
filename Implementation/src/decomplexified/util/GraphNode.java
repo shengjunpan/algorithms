@@ -36,7 +36,7 @@ public class GraphNode<T> {
         return output.toString();
     }
     
-    public static <T> GraphNode<T> buildGraph(T[] values, Integer[][] families) {
+    public static <T> ArrayList<GraphNode<T>> buildGraph(T[] values, Integer[][] families) {
         int n = values.length;
         ArrayList<GraphNode<T>> nodes = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
@@ -51,19 +51,19 @@ public class GraphNode<T> {
                 }
             }
         }
-        return nodes.get(0);
+        return nodes;
     }
     
 /////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
         Integer[][] family = {{0,1,2},{1,0,3,4},{2,0,4,5,6},{3,1},{4,1,2},{5,2}, {6,2}};
         Integer[] values = {0,1,2,3,4,5,6};
-        GraphNode<Integer> root = GraphNode.buildGraph(values, family);
+        GraphNode<Integer> root = GraphNode.buildGraph(values, family).get(0);
 
         // Create a BFS object where `process' means `print'
         GraphBFS<Integer> bfs = new GraphBFS<Integer>() {
             @Override
-            public boolean Process(GraphNode<Integer> node) {
+            public boolean process(GraphNode<Integer> node) {
                 // print a node and its children
                 System.out.println(node.familyToString());
                 return true;

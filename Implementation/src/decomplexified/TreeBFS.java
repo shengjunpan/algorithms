@@ -1,6 +1,7 @@
 package decomplexified;
 
 import java.util.LinkedList;
+
 import decomplexified.util.TreeNode;
 
 /**
@@ -11,29 +12,34 @@ public abstract class TreeBFS<T> {
 
     // action to be defined for BFS traversal. If the returned
     // value is false, terminate the traversal
-    public abstract boolean Process(TreeNode<T> node);
+    protected abstract boolean process(TreeNode<T> node);
     
+    // node whose children are currently being visited
+    protected TreeNode<T> parentNode;
+
     public void traverse(TreeNode<T> root) {
         // if the tree is empty do nothing
         if (root == null) { return; }
+
+        parentNode = null;
         
         // an FIFO queue to remember visited nodes
         LinkedList<TreeNode<T>> visited = new LinkedList<>();
         visited.addFirst(root);
-        if (!Process(root)) { return; }
+        if (!process(root)) { return; }
 
         while (!visited.isEmpty()) {
             // take out the oldest node
-            TreeNode<T> node = visited.pollLast();
+            parentNode = visited.pollLast();
             
             // add children to the queue
-            if (node.left != null) {
-                visited.addFirst(node.left);
-                if (!Process(node.left)) { return; }
+            if (parentNode.left != null) {
+                visited.addFirst(parentNode.left);
+                if (!process(parentNode.left)) { return; }
             }
-            if (node.right != null) {
-                visited.addFirst(node.right);
-                if (!Process(node.right)) { return; }
+            if (parentNode.right != null) {
+                visited.addFirst(parentNode.right);
+                if (!process(parentNode.right)) { return; }
             }
         } // while
     }
@@ -44,18 +50,18 @@ public abstract class TreeBFS<T> {
     public static void main(String[] args) {
         Integer[][] family = {{0,1,2},{1,3,4},{2,5,6},{4,7,8},{6,9,null}};
         Integer[] values = {0,1,2,3,4,5,6,7,8,9};
-        TreeNode<Integer> root = TreeNode.buildTree(values, family);
+        TreeNode<Integer> root = TreeNode.buildTree(values, family).get(0);
 
         // Create a BFS object where `process' means `print'
         TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
             @Override
-            public boolean Process(TreeNode<Integer> node) {
+            public boolean process(TreeNode<Integer> node) {
                 // print a node and its children
-                System.out.println(node.familyToString());
+                System.out.println(node.familyToString() + 
+                        "\tvisited as a child of " + parentNode);
                 return true;
             }
         };
         bfs.traverse(root);
     }
-
 }
