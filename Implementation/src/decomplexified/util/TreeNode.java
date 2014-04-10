@@ -1,17 +1,18 @@
 package decomplexified.util;
 
 import java.util.ArrayList;
-import decomplexified.TreeBFS;
 
 /**
  * @author Alan
  *  Class representing a node (no parent access) in a binary tree
  */
+//begin{treenode}
 public class TreeNode<T> {
     public TreeNode<T> left;
     public TreeNode<T> right;
     public T value;
-
+//end{treenode}
+    
     private Integer id;
     
     TreeNode(T x) { value = x; }
@@ -48,22 +49,5 @@ public class TreeNode<T> {
             if (family[2] != null) { node.right = nodes.get(family[2]); }
         }
         return nodes;
-    }
-    
-/////////////////////////////////////////////////////////////////////
-    public static void main(String[] args) {
-        Integer[][] families = {{0,1,2},{1,3,4},{2,5,null},{4,6,7}};
-        Integer[] values = {0,1,2,3,4,5,6,7};
-        TreeNode<Integer> root = TreeNode.buildTree(values, families).get(0);
-
-        // Create a BFS object where `process' means `print'
-        TreeBFS<Integer> bfs = new TreeBFS<Integer>() {
-            @Override
-            public boolean process(TreeNode<Integer> node) {
-                System.out.println(node.familyToString());
-                return true;
-            }
-        };
-        bfs.traverse(root);
     }
 }

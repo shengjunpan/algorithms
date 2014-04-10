@@ -1,15 +1,17 @@
 package decomplexified.util;
 
 import java.util.ArrayList;
-import decomplexified.GraphBFS;
+import decomplexified.BFSGraph;
 
 /**
  * @author Alan
  * Class representing a node in a graph
  */
+//begin{graphnode}
 public class GraphNode<T> {
     public ArrayList<GraphNode<T>> neighbors = new ArrayList<>();
     public T value;
+//end{graphnode}
 
     private Integer id;
     
@@ -61,7 +63,7 @@ public class GraphNode<T> {
         GraphNode<Integer> root = GraphNode.buildGraph(values, family).get(0);
 
         // Create a BFS object where `process' means `print'
-        GraphBFS<Integer> bfs = new GraphBFS<Integer>() {
+        BFSGraph<Integer> bfs = new BFSGraph<Integer>() {
             @Override
             public boolean process(GraphNode<Integer> node) {
                 // print a node and its children
