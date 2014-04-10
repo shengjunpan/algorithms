@@ -7,6 +7,7 @@ import java.util.Comparator;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-binary-heap.html
  */
+//begin{binary-heap}
 public class BinaryHeap<T extends Comparable<T>> {
 
     BinaryHeap() { comparator = null; }
@@ -103,7 +104,8 @@ public class BinaryHeap<T extends Comparable<T>> {
     
     protected ArrayList<T> nodes = new ArrayList<>();
     protected Comparator<T> comparator = null;
-    
+//end{binary-heap}
+   
     /**
      * print nodes by level, mainly for debugging purpose
      */

@@ -4,7 +4,7 @@ package decomplexified;
  *  http://decomplexify.blogspot.com/2014/03/algorithm-edit-distance.html
  */
 public class EditDistance {
-    
+//begin{edit-dist}    
     public int editDistance(String s, String t) {
         int m = s.length();
         int n = t.length();
@@ -30,7 +30,8 @@ public class EditDistance {
         }
         return H[0];
     }
-
+//end{edit-dist}
+    
     public static void main(String[] args) {
         String s = "simple";
         String t = "smpel";

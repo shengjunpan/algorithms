@@ -4,7 +4,7 @@ package decomplexified;
  *  http://decomplexify.blogspot.com/2014/03/wildcard-match-star-and-qmark.html
  */
 public class WildcardMatchStarAndQMark {
-
+//begin{wildcard-match}
     public boolean matched(String s, String t) {
         int m = s.length();
         int n = t.length();
@@ -37,7 +37,7 @@ public class WildcardMatchStarAndQMark {
         } // for i
         return H[0];
     }
-
+//end{wildcard-match}
     public static void main(String[] args) {
         String s = "*ab*cd?y";
         String t1 = "?a*dxy";

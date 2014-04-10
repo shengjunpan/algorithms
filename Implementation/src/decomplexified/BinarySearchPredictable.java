@@ -6,14 +6,16 @@ import java.util.Arrays;
  *  http://decomplexify.blogspot.com/2014/03/binary-search-revisited.html
  */
 public class BinarySearchPredictable {
-
+//begin{bstype}
     /* which index to return */
     public enum BSTYPE {
         FAST, // first seen by the algorithm (same as before)
         LEFTMOST, // leftmost possible insertion index
         RIGHTMOST // rightmost possible insertion index
     }
-
+//end{bstype}
+    
+//begin{bs-predictable}
     /**
      * 
      * @param a
@@ -49,6 +51,7 @@ public class BinarySearchPredictable {
         // compared == 0 && type == BSTYPE.FAST
         return mid;
     }
+//end{bs-predictable}
 
     public static void main(String[] args) {
         Integer[] a = { 1, 2, 2, 2, 2, 2, 3, 4, 5 };

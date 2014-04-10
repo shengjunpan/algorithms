@@ -4,13 +4,15 @@ package decomplexified;
  *  http://decomplexify.blogspot.com/2014/03/longest-equifix.html
  */
 public class LongestEquifix {
+//begin{equifix-header}
+//begin{equifix-def}
     /**
-     * 
      * @param s
      *            input string
      * @return an array holding lengths of equifices of all prefices of s.
      */
     public int[] getEquifixLength(String s) {
+//end{equifix-header}
         if (s.isEmpty()) {
             return null;
         }
@@ -49,7 +51,8 @@ public class LongestEquifix {
         } // for
         return equifixLength;
     }
- 
+//end{equifix-def}
+
     public static void main(String[] args) {
         LongestEquifix solver = new LongestEquifix();
         String[] strings = { "abcxyzabc", "abcabca" };

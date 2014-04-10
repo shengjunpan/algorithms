@@ -8,6 +8,7 @@ import java.util.Collections;
  * http://decomplexify.blogspot.com/2014/03/algorithm-median-of-sorted-array-with.html
  */
 public class SortedArrayPlus2 {
+//begin{middle2def-helper}        
     /**
      * helper: indexing an array plus 2 new elements, but without actually
      * inserting them
@@ -39,7 +40,10 @@ public class SortedArrayPlus2 {
         else if (i == j2 + 1) { return e2; }
         else { return a[i - 2]; }
     }
- 
+//end{middle2def-helper}        
+
+//begin{middle2declared}
+//begin{middle2def}
     /**
      * Find the middle element(s) of a sorted array plus two new elements
      * 
@@ -50,6 +54,7 @@ public class SortedArrayPlus2 {
      */
     public <T extends Comparable<T>>
     ArrayList<T> middleOfPlus2(T[] a, T e1, T e2) {
+//end{middle2declared}            
         // first find where to insert the new elements
         int j1 = Arrays.binarySearch(a, e1);
         if (j1 < 0) { j1 = -(j1+1); }
@@ -74,6 +79,8 @@ public class SortedArrayPlus2 {
         }
         return middles;
     }
+//end{middle2def}
+    
 ////////////////////////////////////////////////////////////////////////////
     
     // test helper

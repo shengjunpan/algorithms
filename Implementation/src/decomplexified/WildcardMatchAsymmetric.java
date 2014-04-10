@@ -4,7 +4,7 @@ package decomplexified;
  *  http://decomplexify.blogspot.com/2014/04/wildcard-match-star-and-qmark-asymmetric.html
  */
 public class WildcardMatchAsymmetric {
-    
+//begin{wildcard-asymmetric-qmark}    
     /**
      * Helper: matching with only question marks in t. If t has no no question
      * marks, using KMP is optimal.
@@ -27,7 +27,9 @@ public class WildcardMatchAsymmetric {
         }
         return true;
     }
-           
+//end{wildcard-asymmetric-qmark}
+
+//begin{wildcard-asymmetric}
     public boolean matched(String s, String t) {
         // remove stars from t, splitting t into pieces
         String[] P = t.split("\\*+",-1);
@@ -81,7 +83,8 @@ public class WildcardMatchAsymmetric {
         // value of i is the number of pieces matched so far
         return i >= P.length - 1;
     }
-     
+//end{wildcard-asymmetric}
+    
     public static void matchedWithQMarkTest() {
         String s = "abcdefaabcdefaaa";
         String[] ts = {"ab?def", "a?cd?f", "a??de?", "ab?x?f",

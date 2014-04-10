@@ -4,7 +4,7 @@ package decomplexified;
  *  http://decomplexify.blogspot.com/2014/03/largest-square-of-ones.html
  */
 public class LargestSquareOfOnes {
-
+//begin{largest-square}
     /**
      * 
      * @param A
@@ -53,7 +53,8 @@ public class LargestSquareOfOnes {
         } // for i
         return maxSide;
     }
-
+//end{largest-square}
+    
     public static void main(String[] args) {
         char[][] A = { {'0','1','1','0','1','1','0','0'},
                           {'0','0','1','1','1','0','1','1'},

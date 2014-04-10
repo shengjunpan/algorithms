@@ -8,6 +8,7 @@ import java.util.Collections;
  * http://decomplexify.blogspot.com/2014/03/algorithm-median-of-sorted-array-with.html
  */
 public class SortedArrayPlus1 {
+//begin{middle1def-helper}        
     /**
      * helper: indexing an array plus a new element, but without actually
      * inserting it
@@ -29,7 +30,10 @@ public class SortedArrayPlus1 {
         else if (i == j) { return e; }
         else { return a[i - 1]; }
     }
- 
+//end{middle1def-helper}        
+
+//begin{middle1declared}    
+//begin{middle1def}    
     /**
      * Find the middle element(s) of a sorted array plus a new element, but
      * without actually inserting it
@@ -41,6 +45,7 @@ public class SortedArrayPlus1 {
      */
     public <T extends Comparable<T>>
     ArrayList<T> middleOfPlus1(T[] a, T e) {
+//end{middle1declared}       
         // first find where to insert the new element
         int j = Arrays.binarySearch(a, e);
         if (j < 0) { j = -(j+1); }
@@ -62,6 +67,7 @@ public class SortedArrayPlus1 {
         }
         return middles;
     }
+//end{middle1def}    
 
 ////////////////////////////////////////////////////////////////////////////
 

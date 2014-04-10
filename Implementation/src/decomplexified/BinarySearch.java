@@ -6,6 +6,7 @@ import java.util.Arrays;
  * http://decomplexify.blogspot.com/2014/03/algorithm-binary-search.html
  */
 public class BinarySearch {
+//begin{binary-search}    
     /**
      * 
      * @param a
@@ -26,10 +27,11 @@ public class BinarySearch {
 
         int mid = (from + limit) / 2;
         int compared = query.compareTo(a[mid]);
-
+//begin{found-mid}
         if (compared == 0) {
             // return the index once it's found
             return mid;
+//end{found-mid}
         } else if (compared < 0) {
             // recursively search the left half
             return binarySearch(a, from, mid, query);
@@ -38,7 +40,8 @@ public class BinarySearch {
             return binarySearch(a, mid + 1, limit, query);
         }
     }
-
+//end{binary-search}
+    
     public static void main(String[] args) {
         BinarySearch solver = new BinarySearch();
         

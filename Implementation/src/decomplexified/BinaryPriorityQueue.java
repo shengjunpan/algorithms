@@ -7,6 +7,7 @@ import decomplexified.util.WeightedValue;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-priority-queue.html
  */
+//begin{priority-queue}
 public class BinaryPriorityQueue<T,W extends Comparable<W>>
         extends BinaryHeap<WeightedValue<T,W>> {
 
@@ -88,6 +89,7 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
         }
         return topValue;
     }
+//end{priority-queue}
 
 /////////////////////////////////////////////////////////////////////
 

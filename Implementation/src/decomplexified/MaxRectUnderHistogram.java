@@ -7,7 +7,7 @@ import java.util.Stack;
  * http://decomplexify.blogspot.com/2014/03/algorithm-max-rectangle-under-histogram.html
  */
 public class MaxRectUnderHistogram {
-    
+//begin{merged-bar}    
     // helper class: representation of a merged bar
     private static class Bar {
         Bar(int h, int w) { height = h; width = w; }
@@ -15,7 +15,9 @@ public class MaxRectUnderHistogram {
         public int width = 0;
         public int area() { return height * width; }
     }
+//end{merged-bar}    
     
+//begin{max-rect-hist}
     /**
      * 
      * @param height  array of bar heights
@@ -77,7 +79,8 @@ public class MaxRectUnderHistogram {
 
         return maxArea;
     }
-
+//end{max-rect-hist}
+    
     public static void main(String[] args) {
         MaxRectUnderHistogram solver = new MaxRectUnderHistogram();
 

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * http://decomplexify.blogspot.com/2014/03/algorithm-median-of-2-sorted-arrays.html
  */
 public class MedianOfTwoSortedArrays {
-
+//begin{simple-median}
     /**
      * helper functions to find the median a sorted array,
      * hiding the parity of the array size
@@ -24,7 +24,9 @@ public class MedianOfTwoSortedArrays {
         return n == 0 ? 0.0 :
             (n%2 == 1) ? a.get(n/2) : (a.get(n/2-1) + a.get(n/2))/2.0;
     }
-        
+//end{simple-median}
+    
+//begin{median-of-2}    
     public double medianOfTwoSortedArrays(Integer[] a1, Integer[] a2) {
         int n1 = a1.length;
         int n2 = a2.length;
@@ -70,7 +72,8 @@ public class MedianOfTwoSortedArrays {
         }
         return medianOfTwoSortedArrays(newA1, newA2);
     }
-
+//end{median-of-2}
+    
     public static void main(String[] args) {
         Integer[][][] arrayPairs = {
                 {{3, 5, 7, 9, 11, 13, 15}, {2, 5, 6, 8, 12, 13}},

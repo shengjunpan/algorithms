@@ -4,7 +4,7 @@ package decomplexified;
  * http://decomplexify.blogspot.com/2014/03/kmp-algorithm.html
  */
 public class KMP {
-
+//begin{kmp}
     /**
      * Input parameters and local variables may not conform to Java naming
      * convention, but rather correspond to symbols used in the slides
@@ -59,6 +59,7 @@ public class KMP {
         }
         return -1;
     }
+//end{kmp}
 
     public static void main(String[] args) {
         String document = "zzabcxyzabc";

@@ -3,6 +3,7 @@ package decomplexified.util;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/algorithm-priority-queue.html
  */
+//begin{weighted-value}
 public class WeightedValue<T, W extends Comparable<W>>
         implements Comparable<WeightedValue<T, W>> {
     public T value;
@@ -28,6 +29,7 @@ public class WeightedValue<T, W extends Comparable<W>>
         WeightedValue<T,W> vp = (WeightedValue<T,W>) vp2;
         return value.equals(vp.value);
     }
+//end{weighted-value}
     
     @Override
     public String toString() {

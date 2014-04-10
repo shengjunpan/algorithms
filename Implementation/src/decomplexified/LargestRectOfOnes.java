@@ -3,6 +3,7 @@ package decomplexified;
  * @author Alan
  *  http://decomplexify.blogspot.com/2014/03/largest-square-of-ones.html
  */
+//begin{max-rect-ones-helper}
 public class LargestRectOfOnes {
     /* Auxiliary class representing a rectangle */
     private static class Rectangle {
@@ -14,7 +15,9 @@ public class LargestRectOfOnes {
         public int height = 0;
         public int area() { return width * height; }
     }
-    
+//end{max-rect-ones-helper}
+
+//begin{max-rect-ones}    
     /**
      * 
      * @param A
@@ -76,6 +79,7 @@ public class LargestRectOfOnes {
         } // for i
         return maxArea;
     }
+//end{max-rect-ones}    
 
     public static void main(String[] args) {
         char[][] A = { {'0','1','1','0','1','1','0','0'},

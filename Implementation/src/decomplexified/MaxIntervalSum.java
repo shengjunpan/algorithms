@@ -11,6 +11,7 @@ public class MaxIntervalSum {
      * @author Alan
      *
      */
+//begin{max-interval-helper}
     public static class Interval {
         Interval(int f, int t, int s) {
             from = f;
@@ -30,7 +31,9 @@ public class MaxIntervalSum {
         
         public String toString() { return "["+from+","+to+") "+sum; }
     }
-
+//end{max-interval-helper}
+    
+//begin{max-interval}
     public Interval maxIntervalSum(int[] a, boolean allowEmpty) {
         // global max interval
         Interval result;
@@ -65,6 +68,7 @@ public class MaxIntervalSum {
         } // for
         return result;
     }
+//end{max-interval}
     
     public static void main(String[] args) {
         int[][] arrays = {{}, {0}, {1}, {-1}, {-2,1,-3,4,-1,2,1,-5,4}};

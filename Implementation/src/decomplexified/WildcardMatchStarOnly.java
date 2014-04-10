@@ -4,7 +4,7 @@ package decomplexified;
  *  http://decomplexify.blogspot.com/2014/03/algorithm-string-matching-with-wild.html
  */
 public class WildcardMatchStarOnly {
-    
+//begin{star-match}    
     public boolean matched(String s, String t) {
         int m = s.length();
         int n = t.length();
@@ -36,6 +36,7 @@ public class WildcardMatchStarOnly {
         } // for i
         return H[0];
     }
+//end{star-match}
     
     public static void main(String[] args) {
         String s = "abcd";
