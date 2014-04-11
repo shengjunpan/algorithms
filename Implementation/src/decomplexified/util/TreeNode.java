@@ -37,6 +37,14 @@ public class TreeNode<T> {
         return output.toString();
     }
 
+    /**
+     * Build a binary tree.
+     * @param values values[i] is the value for node with index i
+     * @param families families[i] is a triple, where families[i][1]
+     *        and families[2] are indices of the left and right children
+     *        of the node with index families[i][0].
+     * @return an array of nodes
+     */
     public static <T> ArrayList<TreeNode<T>> buildTree(T[] values, Integer[][] families) {
         int n = values.length;
         ArrayList<TreeNode<T>> nodes = new ArrayList<>();
@@ -49,5 +57,14 @@ public class TreeNode<T> {
             if (family[2] != null) { node.right = nodes.get(family[2]); }
         }
         return nodes;
+    }
+    
+    public static void main(String[] args) {
+        Integer[][] family = {{0,1,2},{1,3,4},{2,5,6},{4,7,8},{6,9,null}};
+        Integer[] values = {0,1,2,3,4,5,6,7,8,9};
+        ArrayList<TreeNode<Integer>> nodes = TreeNode.buildTree(values, family);
+        for (TreeNode<Integer> node : nodes) {
+            System.out.println(node.familyToString());
+        }        
     }
 }

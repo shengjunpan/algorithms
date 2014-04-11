@@ -9,6 +9,8 @@ import java.util.Comparator;
  */
 //begin{binary-heap}
 public class BinaryHeap<T extends Comparable<T>> {
+    protected ArrayList<T> nodes = new ArrayList<>();
+    protected Comparator<T> comparator = null;
 
     BinaryHeap() { comparator = null; }
     BinaryHeap(Comparator<T> c) { comparator = c; }
@@ -100,10 +102,7 @@ public class BinaryHeap<T extends Comparable<T>> {
             // use customized comparator
             return comparator.compare(nodes.get(i), nodes.get(j));
         }
-    }
-    
-    protected ArrayList<T> nodes = new ArrayList<>();
-    protected Comparator<T> comparator = null;
+    }    
 //end{binary-heap}
    
     /**

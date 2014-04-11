@@ -1,7 +1,6 @@
 package decomplexified.util;
 
 import java.util.ArrayList;
-import decomplexified.BFSGraph;
 
 /**
  * @author Alan
@@ -38,6 +37,14 @@ public class GraphNode<T> {
         return output.toString();
     }
     
+    /**
+     * Build a directed graph. Both directions must be specified if
+     * an undirected graph is desired
+     * @param values values[i] is the value for the node with index i
+     * @param families families[i] is an array, where families[i][1..]
+     *        are the child indices of node width index families[i][0].
+     * @return an array of nodes
+     */
     public static <T> ArrayList<GraphNode<T>> buildGraph(T[] values, Integer[][] families) {
         int n = values.length;
         ArrayList<GraphNode<T>> nodes = new ArrayList<>();
@@ -58,19 +65,11 @@ public class GraphNode<T> {
     
 /////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        Integer[][] family = {{0,1,2},{1,0,3,4},{2,0,4,5,6},{3,1},{4,1,2},{5,2}, {6,2}};
+        Integer[][] families = {{0,1,2},{1,0,3,4},{2,0,4,5,6},{3,1},{4,1,2},{5,2}, {6,2}};
         Integer[] values = {0,1,2,3,4,5,6};
-        GraphNode<Integer> root = GraphNode.buildGraph(values, family).get(0);
-
-        // Create a BFS object where `process' means `print'
-        BFSGraph<Integer> bfs = new BFSGraph<Integer>() {
-            @Override
-            public boolean process(GraphNode<Integer> node) {
-                // print a node and its children
-                System.out.println(node.familyToString());
-                return true;
-            }
-        };
-        bfs.traverse(root);
+        ArrayList<GraphNode<Integer>> nodes = GraphNode.buildGraph(values, families);
+        for (GraphNode<Integer> node : nodes) {
+            System.out.println(node.familyToString());
+        }
     }
 }

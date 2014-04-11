@@ -33,6 +33,6 @@ public class WeightedValue<T, W extends Comparable<W>>
     
     @Override
     public String toString() {
-        return "[" + value + "]" + weight;
+        return value + "{w=" + weight + "}";
     }
 }

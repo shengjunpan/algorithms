@@ -13,6 +13,19 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
 
     private HashMap<T, Integer> valueLocation = new HashMap<>();
     
+    // trivial methods
+    public void clear() {
+        nodes.clear();
+        valueLocation.clear();
+    }
+    public boolean contains(T value) {
+        return valueLocation.containsKey(value);
+    }
+    public W getPriority(T value) {
+       Integer idx = valueLocation.get(value);
+       return idx==null ? null : nodes.get(idx).weight;
+    }
+    
     /**
      * Insert a value by an associated priority,
      * or update its priority if it exists already
@@ -26,9 +39,6 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
         return existed;
     }
     
-    /**
-     * Override the parent method `push'
-     */
     @Override
     public void push(WeightedValue<T,W> vp) {       
         // find the index of the value to be inserted
@@ -76,6 +86,7 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
         int lastIndex = nodes.size() - 1;
         nodes.set(0, nodes.get(lastIndex));
         nodes.remove(lastIndex);
+        valueLocation.remove(topValue.value);
         
         // move the root down to its proper position
         Integer i = 0;
