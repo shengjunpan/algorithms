@@ -13,13 +13,12 @@ public class BFSGraph<T> {
   //begin{graph-bfs-process}
     // action to be performed for a visited node. If the returned
     // value is false, terminate the traversal after this node.
-    protected boolean process(GraphNode<T> node) {
+    protected void process(GraphNode<T> node) {
 //end{graph-bfs-process}        
 
         // As an example we simply print out the node
         System.out.println(node.familyToString() + 
                 "\tvisited as a child of " + parentNode);
-        return true;
     }
     
 //begin{graph-bfs-traverse}    
@@ -43,7 +42,7 @@ public class BFSGraph<T> {
         frontLine.clear();
 
         // visit the root
-        if (!process(root)) { return; }
+        process(root);
         frontLine.addFirst(root);
         visited.add(root);
 
@@ -54,7 +53,7 @@ public class BFSGraph<T> {
             // add children to the queue
             for (GraphNode<T> child : parentNode.neighbors) {
                 if (visited.contains(child)) { continue; }
-                if (!process(child)) { return; }
+                process(child);
                 frontLine.addFirst(child);
                 visited.add(child);
             } // for

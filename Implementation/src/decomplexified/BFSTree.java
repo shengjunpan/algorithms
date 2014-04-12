@@ -12,13 +12,12 @@ public class BFSTree<T> {
 //begin{tree-bfs-process}
     // action to be performed for a visited node. If the returned
     // value is false, terminate the traversal after this node.
-    protected boolean process(TreeNode<T> node) {
+    protected void process(TreeNode<T> node) {
 //end{tree-bfs-process}        
 
         // As an example we simply print out the node
         System.out.println(node.familyToString() + 
                 "\tvisited as a child of " + parentNode);
-        return true;
     }
 
 //begin{tree-bfs-traverse}    
@@ -38,7 +37,7 @@ public class BFSTree<T> {
         frontLine.clear();
         
         // visit the root
-        if (!process(root)) { return; }
+        process(root);
         frontLine.addFirst(root);
 
         while (!frontLine.isEmpty()) {
@@ -47,11 +46,11 @@ public class BFSTree<T> {
             
             // add children to the queue
             if (parentNode.left != null) {
-                if (!process(parentNode.left)) { return; }
+                process(parentNode.left);
                 frontLine.addFirst(parentNode.left);
             }
             if (parentNode.right != null) {
-                if (!process(parentNode.right)) { return; }
+                process(parentNode.right);
                 frontLine.addFirst(parentNode.right);
             }
         } // while
