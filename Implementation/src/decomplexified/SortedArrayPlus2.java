@@ -62,7 +62,7 @@ public class SortedArrayPlus2 {
         if (j2 < 0) { j2 = -(j2+1); }
         /*
         // Alternative use binarySearch defined in this package:
-        _030514_BinarySearch bsSolver = new _030514_BinarySearch();
+        BinarySearch bsSolver = new BinarySearch();
         int j1 = bsSolver.binarySearch(a, 0, a.length, e1);
         int j2 = bsSolver.binarySearch(a, 0, a.length, e2);
         */
