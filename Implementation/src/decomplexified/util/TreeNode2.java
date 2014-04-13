@@ -7,16 +7,17 @@ import java.util.ArrayList;
  *  Class representing a node (no parent access) in a binary tree
  */
 //begin{treenode}
-public class TreeNode<T> {
-    public TreeNode<T> left;
-    public TreeNode<T> right;
+public class TreeNode2<T> {
+    public TreeNode2<T> left;
+    public TreeNode2<T> right;
+    public TreeNode2<T> parent;
     public T value;
 //end{treenode}
     
     private Integer id;
     
-    TreeNode(T x) { value = x; }
-    TreeNode(T x, int id) { value = x; this.id = id; }
+    TreeNode2(T x) { value = x; }
+    TreeNode2(T x, int id) { value = x; this.id = id; }
     
     public String toString() {
         if (id == null) {
@@ -34,6 +35,7 @@ public class TreeNode<T> {
             output.append(left == null ? " null" : " " + left);
             output.append(right == null ? " null" : " " + right);
         }
+        if (parent != null) { output.append(", parent: " + parent); }
         return output.toString();
     }
 
@@ -45,16 +47,26 @@ public class TreeNode<T> {
      *        of the node with index families[i][0].
      * @return an array of nodes
      */
-    public static <T> ArrayList<TreeNode<T>> buildTree(T[] values, Integer[][] families) {
+    public static <T> ArrayList<TreeNode2<T>> buildTree(T[] values, Integer[][] families) {
         int n = values.length;
-        ArrayList<TreeNode<T>> nodes = new ArrayList<>();
+        ArrayList<TreeNode2<T>> nodes = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
-            nodes.add(new TreeNode<T>(values[i], i));
+            nodes.add(new TreeNode2<T>(values[i], i));
         }
         for (Integer[] family : families) {
-            TreeNode<T> node = nodes.get(family[0]);
-            if (family[1] != null) { node.left = nodes.get(family[1]); }
-            if (family[2] != null) { node.right = nodes.get(family[2]); }
+            TreeNode2<T> node = nodes.get(family[0]);
+            if (family[1] == null) {
+                node.left = null;
+            } else {
+                node.left = nodes.get(family[1]);
+                node.left.parent = node;
+            }
+            if (family[2] == null) {
+                node.right = null;
+            } else {
+                node.right = nodes.get(family[2]);
+                node.right.parent = node;
+            }
         }
         return nodes;
     }
@@ -63,16 +75,16 @@ public class TreeNode<T> {
         Integer[][] family = {{0,1,2},{1,3,4},{2,5,6},{4,7,8},{6,9,null}};
         Integer[] values = {0,1,2,3,4,5,6,7,8,9};
 /*
-            0
-         /    \
-       1        2
-     /  \     /   \
-    3    4   5     6
-        / \       /
-      7    8     9
-*/        
-        ArrayList<TreeNode<Integer>> nodes = TreeNode.buildTree(values, family);
-        for (TreeNode<Integer> node : nodes) {
+              0
+           /    \
+         1        2
+       /  \     /   \
+      3    4   5     6
+          / \       /
+        7    8     9
+ */
+        ArrayList<TreeNode2<Integer>> nodes = TreeNode2.buildTree(values, family);
+        for (TreeNode2<Integer> node : nodes) {
             System.out.println(node.familyToString());
         }        
     }

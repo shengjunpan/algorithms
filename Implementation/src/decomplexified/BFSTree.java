@@ -60,6 +60,15 @@ public class BFSTree<T> {
     public static void main(String[] args) {
         Integer[][] family = {{0,1,2},{1,3,4},{2,5,6},{4,7,8},{6,9,null}};
         Integer[] values = {0,1,2,3,4,5,6,7,8,9};
+/*
+            0
+         /    \
+       1        2
+     /  \     /   \
+    3    4   5     6
+        / \       /
+      7    8     9
+*/
         TreeNode<Integer> root = TreeNode.buildTree(values, family).get(0);
 
         BFSTree<Integer> bfs = new BFSTree<Integer>();
