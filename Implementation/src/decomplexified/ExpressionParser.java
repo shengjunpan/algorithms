@@ -62,7 +62,7 @@ public class ExpressionParser {
         if (safe) {
             tokens.add(token);
         } else {
-            System.err.println("Can't add token " + token + " to stack " + tokens);
+            System.out.println("Can't add token " + token + " to stack " + tokens);
         }
         return safe;
     }
@@ -81,7 +81,7 @@ public class ExpressionParser {
 
         // right parenthesis found: we need 3 tokens
         if (tokens.size() < 3) {
-            System.err.println("Parentheses mismatch.");
+            System.out.println("Parentheses mismatch.");
             return false;
         }
         
@@ -91,7 +91,7 @@ public class ExpressionParser {
         
         // we have enough tokens but they are not: (, number, )
         if (!operand.isNumber() || !leftParen.isOperator('(')) {
-            System.err.println("Parentheses mismatch.");
+            System.out.println("Parentheses mismatch.");
             return false;
         }
         tokens.add(operand);
@@ -155,10 +155,8 @@ public class ExpressionParser {
             if (!reduceParen()) { return null; }
             reduceBinary();
 
-            if (i < expression.length()) {
-                if (!safeAdd(new Token(c))) {
+            if (i < expression.length() && !safeAdd(new Token(c))) {
                     return null;
-                }
             }
         } // for
         
@@ -166,7 +164,7 @@ public class ExpressionParser {
         reduceBinary();
 
         if (tokens.size() > 1 || !tokens.peek().isNumber()) {
-            System.err.println("Incomplete expression.");
+            System.out.println("Incomplete expression.");
             return null;
         }
         return tokens.pop().operand;
@@ -176,15 +174,20 @@ public class ExpressionParser {
     public static void main(String[] args) {
         ExpressionParser parser = new ExpressionParser();
         
-        String expression = "20+34+(12+34)-(56-(78+4))-(6-7)+11";
-        // String expression = "20+34+(12+34)-(56(-78+4))-(6-7)+11";
-        // String expression = "20+34+(12+34))-(56-(78+4))-(6-7)+11";
-        // String expression = "20+34+(12+34)-((56-(78+4))-(6-7)+11";
+        String[] expressions = {
+                "20+34+(12+34)-(56-(78+4))-(6-7)+11",
+                "20+34+(12+34)-(56(-78+4))-(6-7)+11",
+                "20+34+(12+34))-(56-(78+4))-(6-7)+11",
+                "20+34+(12+34)-((56-(78+4))-(6-7)+11"
+        };
 
-        Integer result = parser.parse(expression);
-        System.out.println();
-        if (result != null) {
-            System.out.println(expression + " = " + result);
+        for (int i=0; i < expressions.length; ++i) {
+            String expression = expressions[i];
+            System.out.print(expression + " = ");
+            Integer result = parser.parse(expression);
+            if (result != null) {
+                System.out.println(result);
+            }
         }
     }
 }
