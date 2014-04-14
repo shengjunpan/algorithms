@@ -43,11 +43,11 @@ public class ExpressionParser {
     private Stack<Token> tokens = new Stack<>();
     
 //begin{check}    
-    /* sanity check before adding a new token. Valid adjacent tokens:
-     number and ) can be followed by +, -,  or )
-     start  and ( can be followed by number or (
-     */
-    private void safeAdd(Token token) {
+    // sanity check before adding a new token. Valid adjacent tokens:
+    //   * number and ) can be followed by +, -,  or )
+    //   * start  and ( can be followed by number or (
+    // return false if not safe.
+    private boolean safeAdd(Token token) {
 //end{check}
         
         Token last = tokens.empty() ? null : tokens.peek();        
@@ -59,49 +59,51 @@ public class ExpressionParser {
             safe = token.isNumber() || token.isOperator('(');
         }
         
-        if (!safe) {
-            System.err.println("Can't add token '" + token + " to stack " + tokens);
-            System.exit(1);
+        if (safe) {
+            tokens.add(token);
+        } else {
+            System.err.println("Can't add token " + token + " to stack " + tokens);
         }
-        tokens.add(token);
+        return safe;
     }
 
 //begin{reduce-paren}    
     // take the top 3 tokens and perform parentheses operation.
     // need tokens: (, number, )
+    // return false if parentheses mismatch
     private boolean reduceParen() {
-//end{reduce-paren}    
-        if (tokens.size() < 3) {
-            System.out.println("  --> (no paren)");
-            return false;            
+//end{reduce-paren}
+
+        // right parenthesis not found
+        if (tokens.empty() || !tokens.peek().isOperator(')')) {
+            return true;
         }
-        Token rightParen = tokens.pop();
+
+        // right parenthesis found: we need 3 tokens
+        if (tokens.size() < 3) {
+            System.err.println("Parentheses mismatch.");
+            return false;
+        }
+        
+        tokens.pop();
         Token operand = tokens.pop();
         Token leftParen = tokens.pop();
         
-        if (!operand.isNumber() ||
-                !leftParen.isOperator('(') ||
-                !rightParen.isOperator(')')) {
-            tokens.add(leftParen);
-            tokens.add(operand);
-            tokens.add(rightParen);
-            System.out.println("  --> (no paren)");
-            return false;            
+        // we have enough tokens but they are not: (, number, )
+        if (!operand.isNumber() || !leftParen.isOperator('(')) {
+            System.err.println("Parentheses mismatch.");
+            return false;
         }
         tokens.add(operand);
-        System.out.println("  --> " + tokens);                
         return true;
     }
 
 //begin{reduce-binary}    
     // take the top 3 tokens and perform binary operation 
     // need tokens: number, +/-, number
-    private boolean reduceBinary() {
-//end{reduce-binary}        
-        if (tokens.size() < 3) {
-            System.out.println("  --> (no binary)");
-            return false;
-        }
+    private void reduceBinary() {
+//end{reduce-binary}
+        if (tokens.size() < 3) { return; }
         
         Token operand2 = tokens.pop();
         Token operator = tokens.pop();
@@ -112,8 +114,7 @@ public class ExpressionParser {
             tokens.add(operand1);
             tokens.add(operator);
             tokens.add(operand2);
-            System.out.println("  --> (no binary)");
-            return false;
+            return;
         }
         
         int num1 = operand1.operand;
@@ -121,11 +122,10 @@ public class ExpressionParser {
         char op = operator.operator;        
         int result = op == '+' ? (num1 + num2) : (num1 - num2);
         tokens.add(new Token(result));
-        System.out.println("  --> " + tokens);
-        return true;
     }
     
-//begin{parse}    
+//begin{parse}
+    // return null if parse fails
     public Integer parse(String expression) {
         // we don't parse an empty expression
         if (expression.isEmpty()) { return null; }
@@ -145,31 +145,28 @@ public class ExpressionParser {
                     if (c < '0' || c > '9') { break; }
                     operand = operand * 10 + (c - '0');
                 } // for
-                safeAdd(new Token(operand));
+                if (!safeAdd(new Token(operand))) {
+                    return null;
+                }
             } // if
-            
-            System.out.println();
-            if (i < expression.length()) {
-                System.out.println("Next operator: " + c);
-            }
-            System.out.println("      " + tokens);
             
             // perform reduction. Both must be called, and reduceParen()
             // must be done before reduceBinary()
-            reduceParen();
+            if (!reduceParen()) { return null; }
             reduceBinary();
 
             if (i < expression.length()) {
-                safeAdd(new Token(c));
+                if (!safeAdd(new Token(c))) {
+                    return null;
+                }
             }
         } // for
         
-        System.out.println("\nFinal:");
-        System.out.println("      " + tokens);
-        reduceParen();
+        if (!reduceParen()) { return null; }
         reduceBinary();
 
         if (tokens.size() > 1 || !tokens.peek().isNumber()) {
+            System.err.println("Incomplete expression.");
             return null;
         }
         return tokens.pop().operand;
@@ -178,12 +175,16 @@ public class ExpressionParser {
 
     public static void main(String[] args) {
         ExpressionParser parser = new ExpressionParser();
+        
         String expression = "20+34+(12+34)-(56-(78+4))-(6-7)+11";
+        // String expression = "20+34+(12+34)-(56(-78+4))-(6-7)+11";
+        // String expression = "20+34+(12+34))-(56-(78+4))-(6-7)+11";
+        // String expression = "20+34+(12+34)-((56-(78+4))-(6-7)+11";
+
         Integer result = parser.parse(expression);
-        System.err.println();
-        if (result == null) {
-            System.err.println("Incomplete expression.");
+        System.out.println();
+        if (result != null) {
+            System.out.println(expression + " = " + result);
         }
-        System.out.println(expression + " = " + result);
     }
 }
