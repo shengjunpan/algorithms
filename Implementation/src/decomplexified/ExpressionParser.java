@@ -68,7 +68,7 @@ public class ExpressionParser {
     }
 
 //begin{reduce-paren}    
-    // take the top 3 tokens and perform parentheses operation.
+    // take the top 3 tokens and perform parenthesis operation.
     // need tokens: (, number, )
     // return false if parentheses mismatch
     private boolean reduceParen() {
@@ -91,7 +91,7 @@ public class ExpressionParser {
         Token operand = tokens.pop();
         Token leftParen = tokens.pop();
         
-        // we have enough tokens but no number or left parentheses
+        // we have enough tokens but no number or left parenthesis
         // (the expression is invalid)
         if (!operand.isNumber() || !leftParen.isOperator('(')) {
             System.out.println("Parentheses mismatch.");
@@ -167,8 +167,8 @@ public class ExpressionParser {
             // perform binary reduction
             reduceBinary();
 
-            // add new operator to the stack. If the new operator is right parentheses,
-            // perform parentheses operation right away.
+            // add new operator to the stack. If the new operator is right parenthesis,
+            // perform parenthesis operation right away.
             if (i < expression.length() &&
                     (!safeAdd(new Token(c)) || c == ')' && !reduceParen())) {
                 return null;
@@ -193,6 +193,7 @@ public class ExpressionParser {
         String[] expressions = {
                 "",
                 "1",
+                "20+(34-((1-2)-3))+56",
                 "20+34+(12+34)-(56-(78+4))-(6-7)+11",
                 "20+34+(12+34)-(56(-78+4))-(6-7)+11",
                 "20+34+(12+34))-(56-(78+4))-(6-7)+11",
