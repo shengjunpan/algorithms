@@ -74,12 +74,14 @@ public class ExpressionParser {
     private boolean reduceParen() {
 //end{reduce-paren}
 
-        // right parenthesis not found
+        // right parenthesis not found.
+        // (this does not mean the expression is invalid)
         if (tokens.empty() || !tokens.peek().isOperator(')')) {
             return true;
         }
 
-        // right parenthesis found: we need 3 tokens
+        // right parenthesis found: we need 3 tokens.
+        // (the expression is invalid)
         if (tokens.size() < 3) {
             System.out.println("Parentheses mismatch.");
             return false;
@@ -89,7 +91,8 @@ public class ExpressionParser {
         Token operand = tokens.pop();
         Token leftParen = tokens.pop();
         
-        // we have enough tokens but they are not: (, number, )
+        // we have enough tokens but no number or left parentheses
+        // (the expression is invalid)
         if (!operand.isNumber() || !leftParen.isOperator('(')) {
             System.out.println("Parentheses mismatch.");
             return false;
@@ -103,20 +106,28 @@ public class ExpressionParser {
     // need tokens: number, +/-, number
     private void reduceBinary() {
 //end{reduce-binary}
+        // not enough tokens
         if (tokens.size() < 3) { return; }
         
+        // last token must be a number
+        if (!tokens.peek().isNumber()) { return; }        
         Token operand2 = tokens.pop();
-        Token operator = tokens.pop();
-        Token operand1 = tokens.pop();
-
-        if (!operator.isOperator('+') && !operator.isOperator('-') ||
-                !operand2.isNumber() || !operand1.isNumber()) {
-            tokens.add(operand1);
-            tokens.add(operator);
+        
+        // second last token must be an operator
+        if (tokens.peek().isNumber()) {
             tokens.add(operand2);
             return;
         }
+        Token operator = tokens.pop();
         
+        // third last token must be a number
+        if (!tokens.peek().isNumber()) {
+            tokens.add(operator);
+            tokens.add(operand2);
+            return;
+        }        
+        Token operand1 = tokens.pop();
+
         int num1 = operand1.operand;
         int num2 = operand2.operand;
         char op = operator.operator;        
@@ -128,7 +139,10 @@ public class ExpressionParser {
     // return null if parse fails
     public Integer parse(String expression) {
         // we don't parse an empty expression
-        if (expression.isEmpty()) { return null; }
+        if (expression.isEmpty()) {
+            System.out.println("Expression is empty.");
+            return null;
+        }
         
         // initialization
         tokens.clear();
@@ -150,17 +164,19 @@ public class ExpressionParser {
                 }
             } // if
             
-            // perform reduction. Both must be called, and reduceParen()
-            // must be done before reduceBinary()
-            if (!reduceParen()) { return null; }
+            // perform binary reduction
             reduceBinary();
 
-            if (i < expression.length() && !safeAdd(new Token(c))) {
-                    return null;
+            // add new operator to the stack. If the new operator is right parentheses,
+            // perform parentheses operation right away.
+            if (i < expression.length() &&
+                    (!safeAdd(new Token(c)) || c == ')' && !reduceParen())) {
+                return null;
             }
         } // for
         
-        if (!reduceParen()) { return null; }
+        // it may be necessary to perform one last binary operation if the
+        // expression ends with a number
         reduceBinary();
 
         if (tokens.size() > 1 || !tokens.peek().isNumber()) {
@@ -175,6 +191,8 @@ public class ExpressionParser {
         ExpressionParser parser = new ExpressionParser();
         
         String[] expressions = {
+                "",
+                "1",
                 "20+34+(12+34)-(56-(78+4))-(6-7)+11",
                 "20+34+(12+34)-(56(-78+4))-(6-7)+11",
                 "20+34+(12+34))-(56-(78+4))-(6-7)+11",
