@@ -62,43 +62,9 @@ public class ExpressionParser {
         if (safe) {
             tokens.add(token);
         } else {
-            System.out.println("Can't add token " + token + " to stack " + tokens);
+            System.out.println(token + " can't follow " + tokens.peek());
         }
         return safe;
-    }
-
-//begin{reduce-paren}    
-    // take the top 3 tokens and perform parenthesis operation.
-    // need tokens: (, number, )
-    // return false if parentheses mismatch
-    private boolean reduceParen() {
-//end{reduce-paren}
-
-        // right parenthesis not found.
-        // (this does not mean the expression is invalid)
-        if (tokens.empty() || !tokens.peek().isOperator(')')) {
-            return true;
-        }
-
-        // right parenthesis found: we need 3 tokens.
-        // (the expression is invalid)
-        if (tokens.size() < 3) {
-            System.out.println("Parentheses mismatch.");
-            return false;
-        }
-        
-        tokens.pop();
-        Token operand = tokens.pop();
-        Token leftParen = tokens.pop();
-        
-        // we have enough tokens but no number or left parenthesis
-        // (the expression is invalid)
-        if (!operand.isNumber() || !leftParen.isOperator('(')) {
-            System.out.println("Parentheses mismatch.");
-            return false;
-        }
-        tokens.add(operand);
-        return true;
     }
 
 //begin{reduce-binary}    
@@ -135,6 +101,32 @@ public class ExpressionParser {
         tokens.add(new Token(result));
     }
     
+  //begin{reduce-paren}    
+    // take the top 2 tokens and perform parenthesis operation.
+    // need tokens: (, number
+    // return false if parentheses mismatch
+    private boolean reduceParen() {
+//end{reduce-paren}
+        
+        // after previous reductions the stack must have ( and a number on top.       
+        if(tokens.size() < 2) {
+            System.out.println("parentheses mismatch.");
+            return false;
+        }
+        
+        Token operand = tokens.pop();
+        Token leftParen = tokens.pop();
+        
+        // after previous reductions the stack must have ( and a number on top.       
+        if (!operand.isNumber() || !leftParen.isOperator('(')) {
+            System.out.println("parentheses mismatch.");
+            return false;            
+        }
+
+        tokens.add(operand);
+        return true;
+    }
+
 //begin{parse}
     // return null if parse fails
     public Integer parse(String expression) {
@@ -167,11 +159,14 @@ public class ExpressionParser {
             // perform binary reduction
             reduceBinary();
 
-            // add new operator to the stack. If the new operator is right parenthesis,
-            // perform parenthesis operation right away.
-            if (i < expression.length() &&
-                    (!safeAdd(new Token(c)) || c == ')' && !reduceParen())) {
-                return null;
+            if (i < expression.length()) {
+                // do parenthesis reduction if the new operator is right parenthesis,
+                if (c == ')') {
+                    if(!reduceParen()) { return null; }
+                // otherwise try to push it to the stack.
+                } else if (!safeAdd(new Token(c))) {
+                    return null;
+                }
             }
         } // for
         
@@ -195,6 +190,7 @@ public class ExpressionParser {
                 "1",
                 "20+(34-((1-2)-3))+56",
                 "20+34+(12+34)-(56-(78+4))-(6-7)+11",
+                "20+34+(12+34)-(56-)(78+4))-(6-7)+11",
                 "20+34+(12+34)-(56(-78+4))-(6-7)+11",
                 "20+34+(12+34))-(56-(78+4))-(6-7)+11",
                 "20+34+(12+34)-((56-(78+4))-(6-7)+11"
