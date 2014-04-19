@@ -15,8 +15,8 @@ public class TreeNode<T> {
     
     private Integer id;
     
-    TreeNode(T x) { value = x; }
-    TreeNode(T x, int id) { value = x; this.id = id; }
+    public TreeNode(T x) { value = x; }
+    public TreeNode(T x, int id) { value = x; this.id = id; }
     
     public String toString() {
         if (id == null) {
@@ -59,6 +59,17 @@ public class TreeNode<T> {
         return nodes;
     }
     
+    /* pre-order DFS; for debugging purpose */
+    public void print(boolean family) {
+        if (family) {
+            System.out.println(familyToString());
+        } else {
+            System.out.println(this);
+        }
+        if (left != null) { left.print(family); }
+        if (right != null) { right.print(family); }
+    }
+    
     public static void main(String[] args) {
         Integer[][] family = {{0,1,2},{1,3,4},{2,5,6},{4,7,8},{6,9,null}};
         Integer[] values = {0,1,2,3,4,5,6,7,8,9};
@@ -72,8 +83,6 @@ public class TreeNode<T> {
       7    8     9
 */        
         ArrayList<TreeNode<Integer>> nodes = TreeNode.buildTree(values, family);
-        for (TreeNode<Integer> node : nodes) {
-            System.out.println(node.familyToString());
-        }        
+        nodes.get(0).print(true);
     }
 }
