@@ -3,7 +3,7 @@ import decomplexified.util.TreeNode2;
 
 /**
  * @author Alan
- *
+ *  http://decomplexify.blogspot.com/2014/04/bst.html
  */
 public class BST<T extends Comparable<T>> {
 //begin{search}
