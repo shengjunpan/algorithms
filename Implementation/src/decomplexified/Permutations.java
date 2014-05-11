@@ -1,37 +1,16 @@
 package decomplexified;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+import decomplexified.BinarySearchPredictable.BSTYPE;
 
 /**
  * @author Alan
  * http://decomplexify.blogspot.com/2014/05/permutations.html
  */
-public class Permutations<T extends Comparable<T>> {
-//begin{decreasing-binary-search}
-    /**
-     * Binary search for a query in an array consisting of
-     * decreasing elements (in natural order)
-     * @return the index where the query can be inserted while
-     * maintaining the decreasing order. 
-     */
-    public int decreasingBinarySearch(T[] a, int from, int limit, T query) {
-//end{decreasing-binary-search}
-        if (from >= limit) {
-            return from;
-        }
-        int mid = (from + limit) / 2;
-        int compared = query.compareTo(a[mid]);
-        if (compared == 0) {
-            // we don't really need this case for permutations 
-            return mid;
-        } else if (compared > 0) {
-            // tail recursion
-            return decreasingBinarySearch(a, from, mid, query);
-        } else {
-            // tail recursion
-            return decreasingBinarySearch(a, mid + 1, limit, query);
-        }
-    }
+public class Permutations<T extends Comparable<T>> {    
 //begin{permutation}    
     /**
      * Update a permutation to its successor (in lexicographical order)
@@ -39,8 +18,8 @@ public class Permutations<T extends Comparable<T>> {
      * @return true if the permutation is advanced
      */
     public boolean advancePermutation(T[] perm) {
-        int n = perm.length;
-        
+        int n = perm.length;       
+
         /* find the last index i such that
          * perm[i] < perm[i+1], and
          * perm[i+1] >= perm[i+2] >= ...
@@ -52,9 +31,11 @@ public class Permutations<T extends Comparable<T>> {
 
         /* elements perm[i+1], perm[i+2], ..., perm[n-1] are in
          * decreasing order, so we can use binary search to find
-         * the smallest element that is greater than perm[i].
+         * the smallest element that is strictly greater than perm[i].
          */
-        int j = decreasingBinarySearch(perm, i+1, perm.length, perm[i]);
+        Comparator<T> comparator = Collections.reverseOrder();
+        BinarySearchPredictable<T> searcher = new BinarySearchPredictable<>(comparator);
+        int j = searcher.binarySearchPredictable(perm, i+1, n, perm[i], BSTYPE.LEFTMOST);
         --j;
         
         /* swap perm[i] and perm[j], after which perm[i+1], ..., perm[n-1]
@@ -77,16 +58,10 @@ public class Permutations<T extends Comparable<T>> {
 //end{permutation}    
     
 ///////////////////////////////////////////////////////////////////
-    private static void testBinarySearch() {
-        Permutations<Integer> solver = new Permutations<>();
-        Integer[] array = {4,1,3,7,6,5,2,0};
-        int index = solver.decreasingBinarySearch(array, 3, array.length, 3);
-        System.out.println("index (" + index + ") == " + 6 + "?");
-    }
-    
     private static void testPermutation() {
+        System.out.println("----------");
         Permutations<Integer> solver1 = new Permutations<>(); 
-        Integer[] perm1 = {0,1,2};
+        Integer[] perm1 = {1,5,1};
         int count1 = 0;
         do {
             System.out.println(Arrays.toString(perm1)
@@ -104,7 +79,6 @@ public class Permutations<T extends Comparable<T>> {
 
     }
     public static void main(String[] args) {
-        testBinarySearch();
         testPermutation();
     }
 
