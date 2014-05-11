@@ -7,14 +7,15 @@ import java.util.Arrays;
  * http://decomplexify.blogspot.com/2014/05/permutations.html
  */
 public class Permutations<T extends Comparable<T>> {
-
+//begin{decreasing-binary-search}
     /**
      * Binary search a query in an sub-array consisting of
      * decreasing elements (in natural order)
      * @return the index where the query can be inserted while
      * maintaining the decreasing order. 
      */
-    public int decreasingBinarySearch(T[] a, int from, int limit, T query) {        
+    public int decreasingBinarySearch(T[] a, int from, int limit, T query) {
+//end{decreasing-binary-search}
         if (from >= limit) {
             return from;
         }
