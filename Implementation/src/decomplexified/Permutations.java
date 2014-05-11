@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Permutations<T extends Comparable<T>> {
 //begin{decreasing-binary-search}
     /**
-     * Binary search a query in an sub-array consisting of
+     * Binary search for a query in an array consisting of
      * decreasing elements (in natural order)
      * @return the index where the query can be inserted while
      * maintaining the decreasing order. 
@@ -34,7 +34,7 @@ public class Permutations<T extends Comparable<T>> {
     }
 //begin{permutation}    
     /**
-     * Update a permutation to its next (in lexicographical order)
+     * Update a permutation to its successor (in lexicographical order)
      * @param perm
      * @return true if the permutation is advanced
      */
