@@ -12,7 +12,7 @@ import java.util.HashSet;
 public class WordLadderII {
 //begin{build-graph}    
     /**
-     * Helper function to build a "directed spanning graph" using BFS:
+     * Helper function to build a directed graph with levels using BFS:
      * - the graph is rooted at `source'
      * - the last level contains only `sink'
      * - the graph is represented by recording all parents of a word
