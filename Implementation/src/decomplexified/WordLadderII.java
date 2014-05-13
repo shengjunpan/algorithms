@@ -19,7 +19,8 @@ public class WordLadderII {
      * - all intermediate words must exist in the dictionary.
      * Return an empty graph if `end' is not reachable from `start'.
      */
-    private HashMap<String, HashSet<String>> buildGraph(String start, String end, HashSet<String> dict) {
+    private HashMap<String, HashSet<String>>
+    buildGraph(String start, String end, HashSet<String> dict) {
         HashMap<String, HashSet<String>> parents = new HashMap<>();
         
         // in BFS, when testing if a node can be added to the new
@@ -101,7 +102,8 @@ public class WordLadderII {
 //end{generate-paths}
 
 //begin{find-ladders}
-    public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
+    public ArrayList<ArrayList<String>>
+    findLadders(String start, String end, HashSet<String> dict) {
         ArrayList<ArrayList<String>> paths = new ArrayList<>();
 
         if (!dict.contains(start) || !dict.contains(end)) { return paths; }
