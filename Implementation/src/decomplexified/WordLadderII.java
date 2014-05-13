@@ -13,14 +13,14 @@ public class WordLadderII {
 //begin{build-graph}    
     /**
      * Helper function to build a "directed spanning graph" using BFS:
-     * - the graph is rooted at `start'
-     * - the last level contains only `end'
+     * - the graph is rooted at `source'
+     * - the last level contains only `sink'
      * - the graph is represented by recording all parents of a word
      * - all intermediate words must exist in the dictionary.
-     * Return an empty graph if `end' is not reachable from `start'.
+     * Return an empty graph if `sink' is not reachable from `source'.
      */
     private HashMap<String, HashSet<String>>
-    buildGraph(String start, String end, HashSet<String> dict) {
+    buildGraph(String source, String sink, HashSet<String> dict) {
         HashMap<String, HashSet<String>> parents = new HashMap<>();
         
         // in BFS, when testing if a node can be added to the new
@@ -28,7 +28,7 @@ public class WordLadderII {
         // previous two levels.
         HashSet<String> previousLevel = null;
         HashSet<String> currentLevel = new HashSet<>();
-        currentLevel.add(start);
+        currentLevel.add(source);
 
         // creating levels using BFS
         boolean reachedEnd = false;
@@ -48,9 +48,9 @@ public class WordLadderII {
                             continue;
                         }
                         
-                        // even if we found `end', we don't "break": we need
-                        // to find all parents of `end'.
-                        if (newWord.equals(end)) { reachedEnd = true; }                        
+                        // even if we found `sink', we don't "break": we need
+                        // to find all parents of `sink'.
+                        if (newWord.equals(sink)) { reachedEnd = true; }                        
                         
                         newLevel.add(newWord);
                         if (!parents.containsKey(newWord)) {
@@ -66,11 +66,11 @@ public class WordLadderII {
             currentLevel = newLevel;
         }
         if (reachedEnd) {
-            // if we reached `end', delete all other words in the last level.
+            // if we reached `sink', delete all other words in the last level.
             currentLevel.clear();
-            currentLevel.add(end);
+            currentLevel.add(sink);
         } else {
-            // if we can't reach `end', return an empty graph
+            // if we can't reach `sink', return an empty graph
             parents.clear();
         }
         return parents;
@@ -115,7 +115,8 @@ public class WordLadderII {
             return paths;
         }
 
-        // find all levels using BFS backwardly
+        // find all levels using BFS backwardly:
+        // source --> end, sink --> start
         HashMap<String, HashSet<String>> parents = buildGraph(end, start, dict);
         if (parents.isEmpty()) { return paths; }
 
