@@ -14,6 +14,12 @@ public class MaxPointsOnALine {
         int y;
         Point() { x = 0; y = 0; }
         Point(int a, int b) { x = a; y = b; }
+        
+        // for local debugging
+        public String toString() {
+            return "(" + x + ", " + y + ")";
+        }
+        
     }
     
 //begin{gcd}    
