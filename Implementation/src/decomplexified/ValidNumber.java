@@ -15,7 +15,14 @@ public class ValidNumber {
         private String decimalPoint = "";
         private String fractionPart = "";
         
-        public int read(String s, int i) {
+        /**
+         * Read a real number that is not in scientific notation.
+         * @param s  input string
+         * @param i  starting index
+         * @param integerPartOnly  if true only read sign and integer part
+         * @return  index at the next unread character
+         */
+        public int read(String s, int i, boolean integerPartOnly) {
             sign = integerPart = decimalPoint = fractionPart = "";
             int n = s.length();
             
@@ -23,7 +30,6 @@ public class ValidNumber {
             if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
                 sign = Character.toString(s.charAt(i++));         
             }
-            if (i >= n) { return i; }
 
             // scan for integral part
             StringBuilder integral = new StringBuilder();
@@ -31,6 +37,8 @@ public class ValidNumber {
                 integral.append(s.charAt(i++));
             }
             integerPart = integral.toString();
+            
+            if (integerPartOnly) { return i; }
             
             // scan for decimal point
             if (i < n && s.charAt(i) == '.') {
@@ -69,14 +77,6 @@ public class ValidNumber {
          return !decimalPoint.isEmpty() && (!integerPart.isEmpty() || !fractionPart.isEmpty()) ||
                  decimalPoint.isEmpty() && !integerPart.isEmpty() && fractionPart.isEmpty(); 
         }
-
-        /*
-         * a "number" is an integer if it's valid and there is
-         * no decimal point or fraction part
-         */
-        public boolean isInteger() {
-            return isValid() && decimalPoint.isEmpty() && fractionPart.isEmpty();
-       }        
     }
 //end{real}    
 
@@ -92,7 +92,7 @@ public class ValidNumber {
         while (i < n && s.charAt(i) == ' ') {++i;}
 
         // read significant part
-        i = significant.read(s, i);
+        i = significant.read(s, i, false);
         
         // read symbol e
         if (i < n && (s.charAt(i) == 'e' || s.charAt(i) == 'E')) {
@@ -101,12 +101,12 @@ public class ValidNumber {
         }
         
         // read exponent
-        i = exponent.read(s, i);
+        i = exponent.read(s, i, true);
         while (i < n && s.charAt(i) == ' ') {++i;}
         
         return i >= n && significant.isValid() &&
                 (e.isEmpty() && exponent.isEmpty() ||
-                !e.isEmpty() && exponent.isInteger());
+                !e.isEmpty() && exponent.isValid());
     }
 //end{is-number}
     
@@ -115,7 +115,7 @@ public class ValidNumber {
         String[] strs = {"", "3", "x", "1.", ".1", "1x", "1.23x", "-1x", "+1.23.", "+.", "2e10"};
         for (String str : strs) {
             Real r= new Real();
-            int i = r.read(str, 0);
+            int i = r.read(str, 0, false);
             System.out.println(str + " --> " + r + ", " + str.substring(i)
                     + " --> " + r.isValid());
         }
