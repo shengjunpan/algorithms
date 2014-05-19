@@ -102,6 +102,8 @@ public class ValidNumber {
         
         // read exponent
         i = exponent.read(s, i, true);
+        
+        // skip trailing spaces
         while (i < n && s.charAt(i) == ' ') {++i;}
         
         return i >= n && significant.isValid() &&
