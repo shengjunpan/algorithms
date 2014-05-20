@@ -28,10 +28,10 @@ public class MedianOf2SortedArrays {
      * helper class representing the union of two sorted array pieces
      * without actually merging them. An array of insertion points
      * is created, where each insertion point corresponds to an index
-     * in array 1 so that an element from the second array 2 can be
-     * inserted into array 1 without breaking its order.
+     * in array 1 such that an element from array 2 can be inserted
+     * into array 1 without breaking its order.
      * 
-     * This class can be use to find median of two sorted arrays in
+     * This class can be used to find the median of 2 sorted arrays in
      * O(log(n1) * n2) time, where the size of the second array n2
      * is assumed to be a constant. 
      */
@@ -43,9 +43,9 @@ public class MedianOf2SortedArrays {
         
         int[] insertionPoints;
         
-        // conceptually merge two sorted arrays by finding
-        // the insertion points of each element from the
-        // second array into the first array.
+        // conceptually merge two sorted array pieces by finding
+        // the insertion points of elements from the second
+        // array into the first array.
         public MergedAndSorted(int[] a, int start1, int n1,
                                int[] b, int start2, int n2) {
             this.a = a;
@@ -76,7 +76,7 @@ public class MedianOf2SortedArrays {
         }
                 
         /**
-         * Find the element at given index of the `merge' array
+         * Find the element at given index of the `merged' array
          */
         public int get(int index) {
             index += start1;
