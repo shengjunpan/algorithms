@@ -59,7 +59,8 @@ public class MedianOf2SortedArrays {
             for (int i = 0; i < n2 ; ++i ) {                
                 int searchEnd = start1 + n1;
                 
-                // binary search for b[start2+i] inside a
+                // binary search for b[start2+i] inside array a,
+                // starting at the previous insertion point
                 while (searchStart < searchEnd) {
                     int searchMid = (searchStart + searchEnd) / 2;
                     if (b[start2 + i] < a[searchMid]) {
