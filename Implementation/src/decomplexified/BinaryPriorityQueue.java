@@ -57,11 +57,11 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
             // use i!=null for while-condition so as to keep i
             // in case no swap is done.
             while (true) {
-                Integer p = swapWithSmallerChild(i);
-                if (p == null) { break; }
-                valueLocation.put(nodes.get(p).value, p);
+                Integer c = swapWithSmallerChild(i);
+                if (c == null) { break; }
+                valueLocation.put(nodes.get(c).value, c);
                 valueLocation.put(nodes.get(i).value, i);
-                i = p;
+                i = c;
             }
         }
 
@@ -91,12 +91,12 @@ public class BinaryPriorityQueue<T,W extends Comparable<W>>
         // move the root down to its proper position
         Integer i = 0;
         while ( i != null) {
-            Integer p = swapWithSmallerChild(i);
-            if (p != null ) {
-                valueLocation.put(nodes.get(p).value, p);
+            Integer c = swapWithSmallerChild(i);
+            if (c != null ) {
+                valueLocation.put(nodes.get(c).value, c);
                 valueLocation.put(nodes.get(i).value, i);
             }
-            i = p;
+            i = c;
         }
         return topValue;
     }
