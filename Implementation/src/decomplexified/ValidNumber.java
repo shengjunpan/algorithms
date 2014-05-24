@@ -46,7 +46,7 @@ public class ValidNumber {
                 i++;
             }
 
-            // scan for decimal part
+            // scan for fraction part
             StringBuilder fraction = new StringBuilder();
             while (i < n && s.charAt(i) >= '0' && s.charAt(i) <= '9') {
                 fraction.append(s.charAt(i++));
@@ -67,10 +67,10 @@ public class ValidNumber {
         }
         
         /*
-         * a "number" is valid only when
-         * (1) if there is no decimal point, then there must
+         * a "real number" is valid only when
+         * (1) if there is a decimal point, then there must
          *     be either an integer part or fraction part,
-         * (2) if there is a decimal point, then the integer
+         * (2) if there is NO decimal point, then the integer
          *     part must exist and fraction part must not.
          */
         public boolean isValid() {
